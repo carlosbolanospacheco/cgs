@@ -1,0 +1,4 @@
+<% if @cargo.errors.size == 0 %>
+  $(".canvas_listado_cargos").html("<%= escape_javascript(render 'cargos/listado') %>")
+<% end %>
+$(".alerts").html("<%= escape_javascript(render 'shared/alerts') %>")

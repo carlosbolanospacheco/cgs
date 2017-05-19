@@ -1,0 +1,8 @@
+<% if @user.errors.size == 0 %>
+  $(".canvas_user").empty();
+  $(".box_user").addClass('hidden');
+  $(".canvas_listado_users").html("<%= escape_javascript(render 'users/listado') %>")
+<% else %>
+  $(".canvas_user").html("<%= escape_javascript(render 'users/form') %>");
+<% end %>
+$(".alerts").html("<%= escape_javascript(render 'shared/alerts') %>")

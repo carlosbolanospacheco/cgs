@@ -1,0 +1,92 @@
+<%= form_for @regimen, remote:true, html: {autocomplete: 'off'} do |f| %>
+  <div class="box-body">
+    <%= render 'shared/errors', object: f.object %>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :literal, 'Nombre *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-exchange"></i>
+            </div>
+            <%= f.text_field :literal, class: "form-control", required: "required", placeholder: "Nombre del régimen" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label id="configurar_condiciones">
+            <input type="checkbox" class="flat-red" id="configurar_condiciones_checkbox" <%= 'checked' if @regimen.importe_colegio %>>
+            &nbsp;Configurar condiciones de pago
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row condiciones-pago <%= 'hidden' if !@regimen.period_id || @regimen.period_id == 0 %>">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :importe_colegio, 'Importe del colegio' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-money"></i>
+            </div>
+            <%= f.text_field :importe_colegio, class: "form-control", placeholder: "Importe del colegio" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :importe_consejo, 'Importe del consejo' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-money"></i>
+            </div>
+            <%= f.text_field :importe_consejo, class: "form-control", placeholder: "Importe del consejo" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :porcentaje_a_pagar, 'Porcentaje a pagar' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-eyedropper"></i>
+            </div>
+            <%= f.text_field :porcentaje_a_pagar, class: "form-control", placeholder: "% a pagar" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :period_id, "Periodo" %>
+          <%= f.select :period_id, options_for_select(Period.all.collect{|u| ["#{u.nombre}", u.id]}, @regimen.period_id), {}, {class: "form-control"} %>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box-footer">
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <button type="button" class="btn btn-danger cancelButton">Cancelar</button>
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+  $(".cancelButton").click(function(){
+     $(".canvas_regimen").empty();
+     $(".box_regimen").addClass('hidden');
+  });
+});
+
+$(document).on("click","#configurar_condiciones",function(e){
+  if ($("#configurar_condiciones_checkbox").is(":checked")) {
+    $(".condiciones-pago").removeClass('hidden');
+  } else {
+    $(".condiciones-pago").addClass('hidden');
+  }
+});
+
+</script>

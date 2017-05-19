@@ -1,0 +1,28 @@
+<section class="content-header">
+  <h1>
+    Cargos de la Junta
+    <small>Gestión de cargos</small>
+  </h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-body pad table-responsive">
+      <%= link_to " Crear un nuevo cargo", new_cargo_path, remote: true, class: "btn btn-block btn-info btn-lg fa fa-plus" %>
+    </div>
+  </div>
+
+  <div class="box hidden box_cargo">
+    <div class="box-body canvas_cargo">
+    </div>
+  </div>
+
+  <div class="box box-primary">
+    <div class="box-header">
+      <i class="fa fa-sitemap"></i>
+      <h3 class="box-title">Listado de cargos</h3>
+    </div>
+    <div class="box-body canvas_listado_cargos">
+      <%= render 'cargos/listado' %>
+    </div>
+  </div>
+</section>

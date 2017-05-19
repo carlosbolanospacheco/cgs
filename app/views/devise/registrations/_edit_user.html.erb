@@ -1,0 +1,16 @@
+<section class="content-header">
+  <h1>
+    Usuarios
+    <small>Editar <%= resource_name.to_s.humanize %></small>
+  </h1>
+</section>
+<section class="content">
+  <div class="box box-primary">
+    <%= render 'devise/registrations/form' %>
+  </div>
+</section>
+<!--
+<h3>Cancel my account</h3>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<%= link_to "Back", :back %>
+-->

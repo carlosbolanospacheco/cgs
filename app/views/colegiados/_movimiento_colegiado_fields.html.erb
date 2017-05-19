@@ -1,0 +1,39 @@
+<div class="nested-fields">
+  <div class="row">
+    <div class="box-tools pull-right">
+      <%= link_to_remove_association '', f, class: "fa fa-trash btn btn-box-tool", data: { confirm: "¿Eliminar movimiento?" } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group field">
+        <%= f.label :created_at, "Fecha" %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <%= f.text_field :created_at, value: f.object.created_at ? f.object.created_at.strftime('%d-%m-%Y') : DateTime.now.to_date.strftime('%d-%m-%Y'), class: "form-control", disabled: "" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group field">
+        <%= f.label :tipo_movimiento_id, "Tipo de movimiento" %>
+        <%= f.select :tipo_movimiento_id, options_for_select(TipoMovimiento.all.collect{|u| ["#{u.literal}", u.id]}, f.object.tipo_movimiento_id), {}, {class: "form-control"} %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group field">
+        <%= f.label :regimen_colegiado_id, "Régimen" %>
+        <%= f.select :regimen_colegiado_id, options_for_select(RegimenColegiado.all.collect{|u| ["#{u.literal}", u.id]},
+            f.object.regimen_colegiado_id ? f.object.regimen_colegiado_id : @colegiado.regimen_colegiado.id), {}, {class: "form-control"} %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :observaciones, 'Observaciones' %>
+        <%= f.text_area :observaciones, class: "form-control", placeholder: "Observaciones", rows: 3, cols: 20 %>
+      </div>
+    </div>
+  </div>
+</div>

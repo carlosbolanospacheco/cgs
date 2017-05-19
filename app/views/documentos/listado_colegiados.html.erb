@@ -1,0 +1,131 @@
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title">Listado de Colegiados</h3>
+  </div>
+  <div class="box-body">
+    <table class="table table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Apellidos y Nombre</th>
+        <% if parametros['nif'] %>
+          <th>NIF</th>
+        <% end %>
+        <% if parametros['genero'] %>
+          <th>Género</th>
+        <% end %>
+        <% if parametros['estado_colegiado'] %>
+          <th>Estado</th>
+        <% end %>
+        <% if parametros['email'] %>
+          <th>Email</th>
+        <% end %>
+        <% if parametros['fecha_nacimiento'] %>
+          <th>Fecha Nacimiento</th>
+        <% end %>
+        <% if parametros['telefono_fijo'] %>
+          <th>Teléfono Fijo</th>
+        <% end %>
+        <% if parametros['telefono_movil'] %>
+          <th>Teléfono Móvil</th>
+        <% end %>
+        <% if parametros['fax'] %>
+          <th>Fax</th>
+        <% end %>
+        <% if parametros['titulacion'] %>
+          <th>Titulación</th>
+        <% end %>
+        <% if parametros['fecha_alta'] %>
+          <th>Fecha de Alta</th>
+        <% end %>
+        <% if parametros['fecha_baja'] %>
+          <th>Fecha de Baja</th>
+        <% end %>
+        <% if parametros['jura'] %>
+          <th>Año de Jura</th>
+        <% end %>
+        <% if parametros['epp'] %>
+          <th>Año de EPP</th>
+        <% end %>
+        <% if parametros['regimen_colegiado'] %>
+          <th>Régimen</th>
+        <% end %>
+        <% if parametros['empresa'] %>
+          <th>Empresa</th>
+        <% end %>
+        <% if parametros['cif_empresa'] %>
+          <th>CIF Empresa</th>
+        <% end %>
+        <% if parametros['archivo'] %>
+          <th>Archivo</th>
+        <% end %>
+        <% if parametros['censo'] %>
+          <th>En Censo</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% colegiados.each do |colegiado| %>
+        <tr>
+          <td><%= colegiado.numero %></td>
+          <td><%= colegiado.nombre_completo %></td>
+          <% if parametros['nif'] %>
+            <td><%= colegiado.nif %></td>
+          <% end %>
+          <% if parametros['genero'] %>
+            <td><%= colegiado.genero %></td>
+          <% end %>
+          <% if parametros['estado_colegiado'] %>
+            <td><%= colegiado.estado %></td>
+          <% end %>
+          <% if parametros['email'] %>
+            <td><%= colegiado.email %></td>
+          <% end %>
+          <% if parametros['fecha_nacimiento'] %>
+            <td><%= colegiado.nacimiento %></td>
+          <% end %>
+          <% if parametros['telefono_fijo'] %>
+            <td><%= colegiado.telefono_fijo %></td>
+          <% end %>
+          <% if parametros['telefono_movil'] %>
+            <td><%= colegiado.telefono_movil %></td>
+          <% end %>
+          <% if parametros['fax'] %>
+            <td><%= colegiado.fax %></td>
+          <% end %>
+          <% if parametros['titulacion'] %>
+            <td><%= colegiado.titulacion.nombre %></td>
+          <% end %>
+          <% if parametros['fecha_alta'] %>
+            <td><%= colegiado.alta_colegio %></td>
+          <% end %>
+          <% if parametros['fecha_baja'] %>
+            <td><%= colegiado.baja_colegio %></td>
+          <% end %>
+          <% if parametros['jura'] %>
+            <td><%= colegiado.jura %></td>
+          <% end %>
+          <% if parametros['epp'] %>
+            <td><%= colegiado.epp %></td>
+          <% end %>
+          <% if parametros['regimen_colegiado'] %>
+            <td><%= colegiado.regimen_colegiado.literal %></td>
+          <% end %>
+          <% if parametros['empresa'] %>
+            <td><%= colegiado.nombre_empresa %></td>
+          <% end %>
+          <% if parametros['cif_empresa'] %>
+            <td><%= colegiado.nif_empresa %></td>
+          <% end %>
+          <% if parametros['archivo'] %>
+            <td><%= colegiado.numero_archivo %></td>
+          <% end %>
+          <% if parametros['censo'] %>
+            <th><%= colegiado.en_censo? %></th>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>

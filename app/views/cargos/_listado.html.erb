@@ -1,0 +1,51 @@
+<table id="listado-cargos" class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Cargo</th>
+      <th>Código</th>
+      <th>Colegiado</th>
+      <th>Nº de Colegiado</th>
+      <th>NIF</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cargos.each do |cargo| %>
+      <tr>
+        <td><%= cargo.nombre %></td>
+        <td><%= cargo.codigo %></td>
+        <td><%= cargo.colegiado.nombre_completo if cargo.colegiado %></td>
+        <td><%= cargo.colegiado.numero if cargo.colegiado %></td>
+        <td><%= cargo.colegiado.nif if cargo.colegiado %></td>
+        <td>
+          <%= link_to "", edit_cargo_path(cargo), remote: true, class: "fa fa-edit" %>
+        </td>
+        <td>
+          <%= link_to "", cargo_path(cargo), remote: true, method: :delete,
+                      class: "fa fa-trash", data: { confirm: '¿Confirma que quiere eliminar el cargo?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+$(document).ready(function () {
+    $("#listado-cargos").DataTable(
+      {"ordering": false,
+       "language": {
+         "paginate": {
+           "next": "Siguiente",
+           "previous": "Anterior" },
+         "search": "Filtrar cargos",
+         "info": "Mostrando página _PAGE_ de _PAGES_",
+         "emptyTable": "No existen cargos",
+         "lengthMenu": "Mostrando _MENU_ cargos por página",
+         "infoEmpty": "No se muestran cargos",
+         "infoFiltered": "(filtrado de un total de _MAX_ cargos)",
+         "zeroRecords": "No existen cargos que se ajusten a este filtro"
+       }
+      }
+    );
+  });
+</script>

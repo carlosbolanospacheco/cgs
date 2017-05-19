@@ -1,0 +1,81 @@
+<%= form_for @cargo, remote: true, html: { autocomplete: 'off', multipart: true } do |f| %>
+  <div class="box-body">
+    <%= render 'shared/errors', object: f.object %>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :nombre, 'Nombre *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-trophy"></i>
+            </div>
+            <%= f.text_field :nombre, class: "form-control", required: "required", placeholder: "Nombre del cargo" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :codigo, 'Código *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-key"></i>
+            </div>
+            <%= f.text_field :codigo, class: "form-control", required: "required", placeholder: "Código del cargo" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label id="configurar_persona">
+            <input type="checkbox" class="flat-red icheck" id="configurar_persona_checkbox" <%= 'checked' if @cargo.colegiado %>>
+            &nbsp;Configurar una persona para el cargo
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-body persona-en-cargo <%= 'hidden' if !@cargo.colegiado %>">
+    <div class="box-header">
+      <i class="fa fa-female"></i>
+      <h3 class="box-title">Colegiado en el cargo</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :colegiado_id, "Colegiado" %>
+          <%= f.select :colegiado_id, options_for_select(Colegiado.activos.collect{|u| ["#{u.nombre_completo}", u.id]}.insert(0, ''), @cargo.colegiado_id), {}, {class: "form-control"} %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :firma, 'Firma' %><br>
+          <%= image_tag @cargo.firma.url(:thumb), id: "firma", class: 'img-circle', size: '150x150' %>
+          <%= f.file_field :firma, accept: 'image/jpeg,image/gif,image/png' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-footer">
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <button type="button" class="btn btn-danger cancelButton">Cancelar</button>
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+  $(".cancelButton").click(function(){
+    $(".canvas_cargo").empty();
+    $(".box_cargo").addClass('hidden');
+  });
+});
+
+$(document).on("click","#configurar_persona",function(e){
+  if ($("#configurar_persona_checkbox").is(":checked")) {
+    $(".persona-en-cargo").removeClass('hidden');
+  } else {
+    $(".persona-en-cargo").addClass('hidden');
+  }
+});
+
+</script>

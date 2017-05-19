@@ -1,0 +1,146 @@
+<%= form_for @colegio, remote: true, html: { autocomplete: 'off', multipart: true } do |f| %>
+  <div class="box-body">
+    <%= render 'shared/errors', object: f.object %>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :logo_colegio, 'Logo del Colegio' %>
+          <% if @colegio.logo_colegio.file? %>
+            <%= image_tag @colegio.logo_colegio.url(:thumb), id: "logo_colegio" %>
+          <% end %>
+          <%= f.file_field :logo_colegio, accept: 'image/jpeg,image/gif,image/png' %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :logo_escuela, 'Logo de la Escuela' %>
+          <% if @colegio.logo_escuela.file? %>
+            <%= image_tag @colegio.logo_escuela.url(:thumb), id: "logo_escuela" %>
+          <% end %>
+          <%= f.file_field :logo_escuela, accept: 'image/jpeg,image/gif,image/png' %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :logo_formacion, 'Logo de Formación' %>
+          <% if @colegio.logo_formacion.file? %>
+            <%= image_tag @colegio.logo_formacion.url(:thumb), id: "logo_formacion" %>
+          <% end %>
+          <%= f.file_field :logo_formacion, accept: 'image/jpeg,image/gif,image/png' %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :nombre, 'Nombre *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-bank"></i>
+            </div>
+            <%= f.text_field :nombre, class: "form-control", required: "required", placeholder: "Colegio..." %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :cif, 'CIF *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-credit-card"></i>
+            </div>
+            <%= f.text_field :cif, class:"form-control", placeholder: "CIF", required: "required" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :telefono, 'Teléfono' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-phone"></i>
+            </div>
+            <%= f.telephone_field :telefono, class:"form-control", placeholder: "Teléfono" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :fax, 'Fax' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-fax"></i>
+            </div>
+            <%= f.text_field :fax, class:"form-control pull-right", placeholder: "Fax" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :direccion, 'Dirección *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-home"></i>
+            </div>
+            <%= f.text_field :direccion, class: "form-control", required: "required", placeholder: "Dirección" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :codigo_postal, 'Código postal *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-envelope"></i>
+            </div>
+            <%= f.text_field :codigo_postal, class: "form-control", required: "required", placeholder: "Código postal" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :provincia_id, "Provincia *" %>
+          <%= f.select :provincia_id, options_for_select(Provincia.all.collect{|u| ["#{u.nombre}", u.id]}, @colegio.provincia_id), {}, {class: "form-control"} %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :poblacion, 'Población *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-map"></i>
+            </div>
+            <%= f.text_field :poblacion, class: "form-control", required: "required", placeholder: "Población" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :antiguedad_elegible, 'Años mínimos censo *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </div>
+            <%= f.number_field :antiguedad_elegible, class: "form-control", required: "required", min: 0, max: 10, step: 1 %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-footer">
+    <button type="submit" class="btn btn-success">Guardar</button>
+<!--    <button type="button" class="btn btn-danger cancelButton">Cancelar</button> -->
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+  $(".cancelButton").click(function(){
+    $(".canvas_cargo").empty();
+    $(".box_cargo").addClass('hidden');
+  });
+});
+</script>

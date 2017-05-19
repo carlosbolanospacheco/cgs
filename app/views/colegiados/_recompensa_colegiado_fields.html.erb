@@ -1,0 +1,33 @@
+<div class="nested-fields">
+  <div class="row">
+    <div class="box-tools pull-right">
+      <%= link_to_remove_association '', f, class: "fa fa-trash btn btn-box-tool", data: { confirm: "¿Eliminar recompensa?" } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group date">
+        <%= f.label :fecha, "Fecha *" %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+          </div>
+          <%= f.text_field :fecha, value: f.object.fecha ? f.object.fecha.strftime("%d-%m-%Y") : '', id: "datepicker_fecha", class: "form-control pull-right", placeholder: 'dd-mm-yyyy' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="form-group">
+        <%= f.label :recompensa, 'Tipo de Recompensa *' %>
+        <%= f.text_area :recompensa, class: "form-control", placeholder: "Tipo de recompensa", rows: 3, cols: 20 %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('#datepicker_fecha').datepicker({
+    format: 'dd-mm-yyyy',
+    language: 'es',
+    autoclose: true
+  });
+</script>

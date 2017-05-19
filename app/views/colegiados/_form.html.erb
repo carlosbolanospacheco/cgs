@@ -1,0 +1,191 @@
+<%= form_for @colegiado, remote:true, html: {autocomplete: 'off', multipart: true} do |f| %>
+  <div class="box box-primary collapsed-box">
+    <div class="box-header">
+      <i class="fa fa-user"></i>
+      <h3 class="box-title">Ficha de Colegiado</h3>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+      </div>
+    </div>
+    <div class="box-body">
+      <%= render 'shared/errors', object: f.object %>
+      <%= render 'colegiados/ficha_colegiado', f: f %>
+    </div>
+  </div>
+
+  <% if !@colegiado.new_record? %>
+
+    <div class="box collapsed-box">
+      <div class="box-header">
+        <i class="fa fa-home"></i>
+        <h3 class="box-title">Direcciones</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <%= f.fields_for :direccion_colegiados do |direccion| %>
+            <div class="col-md-11">
+              <div class="form-group">
+                <%= render 'colegiados/direccion_colegiado_fields', f: direccion %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="form-group">
+              <%= link_to_add_association "Añadir dirección", f, :direccion_colegiados, class: "btn btn-sm btn-info" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box collapsed-box">
+      <div class="box-header">
+        <i class="fa fa-money"></i>
+        <h3 class="box-title">Histórico de Cargos y Recompensas</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <%= f.fields_for :recompensa_colegiados do |recompensa| %>
+            <div class="col-md-11">
+              <div class="form-group">
+                <%= render 'colegiados/recompensa_colegiado_fields', f: recompensa %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="box-footer">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="form-group">
+              <%= link_to_add_association "Añadir Cargo / Recompensa", f, :recompensa_colegiados, class: "btn btn-sm btn-info" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box collapsed-box">
+      <div class="box-header">
+        <i class="fa fa-refresh"></i>
+        <h3 class="box-title">Histórico del Colegiado</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="box-body">
+        <div class="row">
+          <%= f.fields_for :movimiento_colegiados do |movimiento_colegiado| %>
+            <div class="col-md-11">
+              <div class="form-group">
+                <%= render 'colegiados/movimiento_colegiado_fields', f: movimiento_colegiado %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="box-footer">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="form-group">
+              <%= link_to_add_association "Añadir movimiento", f, :movimiento_colegiados, class: "btn btn-sm btn-info" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% if @colegiado.cargo_colegiados.length > 0 %>
+      <div class="box collapsed-box">
+        <div class="box-header">
+          <i class="fa fa-sitemap"></i>
+          <h3 class="box-title">Histórico de Cargos en el Colegio</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <%= f.fields_for :cargo_colegiados do |cargo_colegiado| %>
+              <div class="col-md-11">
+                <div class="form-group">
+                  <%= render 'colegiados/cargo_colegiado_fields', f: cargo_colegiado %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+
+  <div class="box box">
+    <div class="box-footer">
+      <button type="submit" class="btn btn-primary">Guardar</button>
+      <button type="button" class="btn btn-danger cancelButton">Cancelar</button>
+    </div>
+  </div>
+
+<% end %>
+<script>
+  $('#datepicker_nacimiento').datepicker({
+    format: 'dd-mm-yyyy',
+    language: 'es',
+    autoclose: true
+  });
+
+  $('#datepicker_alta').datepicker({
+    format: 'dd-mm-yyyy',
+    language: 'es',
+    autoclose: true
+  });
+
+  $('#datepicker_baja').datepicker({
+    format: 'dd-mm-yyyy',
+    language: 'es',
+    autoclose: true
+  });
+
+  $(document).ready(function(){
+    $(".cancelButton").click(function(){
+      $(".content").empty();
+      $.post( "<%= listado_colegiados_path %>", function( data ) {
+      });
+    });
+  });
+
+  function readURL(input, destino) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $(destino).attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $('#colegiado_fotografia').on('change',function () {
+    readURL(this, '#fotografia_imagen');
+   });
+
+   $('#colegiado_certificado_cuotas').on('change',function () {
+     readURL(this, '#cuotas_imagen');
+    });
+
+    $('#colegiado_certificado_colegiacion').on('change',function () {
+      readURL(this, '#colegiacion_imagen');
+     });
+</script>

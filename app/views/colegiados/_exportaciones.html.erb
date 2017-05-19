@@ -1,0 +1,15 @@
+<div class="box-header">
+  <i class="fa fa-folder-open"></i>
+  <h3 class="box-title">Exportaciones</h3>
+  <div class="box-tools pull-right">
+    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+  </div>
+</div>
+<div class="box-body">
+  <%= link_to colegiados_path(format: 'xls'), class: 'btn btn-app' do %>
+    <i class="fa fa-file-excel-o"></i>Excel
+  <% end %>
+  <%= link_to '', class: 'btn btn-app', 'data-toggle': 'modal', 'data-target': '#modalExportarPDF' do %>
+    <i class="fa fa-file-pdf-o"></i>PDF
+  <% end %>
+</div>

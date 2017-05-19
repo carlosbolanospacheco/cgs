@@ -1,0 +1,58 @@
+<section class="sidebar">
+  <ul class="sidebar-menu">
+    <li class="treeview active">
+      <a href="<%= root_path %>" data-remote=true>
+        <i class="fa fa-graduation-cap"></i>
+        Colegiados
+      </a>
+    </li>
+    <li class="treeview">
+      <a>
+        <i class="fa fa-file-excel-o"></i>
+        Recibos y Documentos
+        <i class="fa fa-angle-left pull-right"></i>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="#">Totales</a></li>
+        <li><a href="#">Liquidación mensual consejo</a></li>
+        <li><a href="#">Comunicaciones y documentos</a></li>
+      </ul>
+    </li>
+    <li class="treeview">
+      <a>
+        <i class="fa fa-cogs"></i>
+        Configuración General
+        <i class="fa fa-angle-left pull-right"></i>
+      </a>
+      <ul class="treeview-menu">
+        <li>
+          <%= link_to "Colegio", edit_colegio_path(Colegio.first), remote: true %>
+        </li>
+        <li>
+          <%= link_to "Regímenes colegiados", regimen_colegiados_path, remote: true %>
+        </li>
+        <li>
+          <%= link_to "Cargos", cargos_path, remote: true %>
+        </li>
+        <li>
+          <%= link_to "Causas de baja", causa_bajas_path, remote: true %>
+        </li>
+        <li>
+          <%= link_to "Entidades bancarias", bancos_path, remote: true %>
+        </li>
+        <li>
+          <%= link_to "Cuentas bancarias", accounts_path, remote: true %>
+        </li>
+      </ul>
+    </li>
+    </li>
+    <% if current_user.superadmin_role? %>
+      <li class="treeview">
+        <a href="<%= users_path %>" data-remote=true>
+          <i class="fa fa-users"></i>
+          Usuarios
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</section>

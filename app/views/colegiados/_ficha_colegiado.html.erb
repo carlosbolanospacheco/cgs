@@ -1,0 +1,246 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :fotografia, 'Fotografía' %><br>
+      <%= image_tag @colegiado.fotografia.url(:thumb), id: "fotografia_imagen", class: 'img-circle', size: '150x150' %>
+      <%= f.file_field :fotografia, accept: 'image/jpeg,image/gif,image/png' %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :numero, 'Número de socio *' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-paw"></i>
+        </div>
+        <%= f.text_field :numero, class: "form-control", required: "required", placeholder: "Número de socio" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :nombre, 'Nombre *' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-user"></i>
+        </div>
+        <%= f.text_field :nombre, class: "form-control", required: "required", placeholder: "Nombre" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :apellidos, 'Apellidos *' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-user-plus"></i>
+        </div>
+        <%= f.text_field :apellidos, class: "form-control", required: "required", placeholder: "Apellidos" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :nif, 'NIF *' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-credit-card"></i>
+        </div>
+        <%= f.text_field :nif, class:"form-control", placeholder: "NIF", required: "required" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group date">
+      <%= f.label :nacimiento, "Fecha de nacimiento" %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-calendar"></i>
+        </div>
+        <%= f.text_field :nacimiento, value: @colegiado.nacimiento ? @colegiado.nacimiento.strftime("%d-%m-%Y") : '', id: "datepicker_nacimiento", class: "form-control pull-right", placeholder: 'dd-mm-yyyy' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :email, 'Correo electrónico' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-envelope-o"></i>
+        </div>
+        <%= f.email_field :email, class:"form-control", placeholder: "Correo electrónico" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :telefono_fijo, 'Teléfono fijo' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-phone"></i>
+        </div>
+        <%= f.telephone_field :telefono_fijo, class:"form-control", placeholder: "Teléfono fijo" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :telefono_movil, 'Teléfono móvil' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-mobile"></i>
+        </div>
+        <%= f.telephone_field :telefono_movil, class:"form-control", placeholder: "Teléfono móvil" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :fax, 'Fax' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-fax"></i>
+        </div>
+        <%= f.text_field :fax, class:"form-control pull-right", placeholder: "Fax" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :genero, 'Género *' %>
+      <%= f.select(:genero, [['Mujer', 'M'], ['Hombre', 'H']], {}, {class: "form-control"}) %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :titulacion_id, 'Titulación *' %>
+      <%= f.select :titulacion_id, options_for_select(Titulacion.all.collect{|u| ["#{u.nombre}", u.id]}, @colegiado.titulacion_id), {}, {class: "form-control"} %>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group date">
+      <%= f.label :alta_colegio, "Fecha de alta *" %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-calendar"></i>
+        </div>
+        <%= f.date_field :alta_colegio, id: "datepicker_alta", value: @colegiado.alta_colegio ? @colegiado.alta_colegio.strftime("%d-%m-%Y") : '', class: "form-control pull-right", placeholder: 'dd-mm-yyyy' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group date">
+      <%= f.label :baja_colegio, "Fecha de baja" %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-calendar"></i>
+        </div>
+        <%= f.date_field :baja_colegio, id: "datepicker_baja", value: @colegiado.baja_colegio ? @colegiado.baja_colegio.strftime("%d-%m-%Y") : '', class: "form-control pull-right", placeholder: 'dd-mm-yyyy' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 <%= 'hidden' if !@colegiado.baja_colegio %>" id='selCausaBaja'>
+    <div class="form-group">
+      <%= f.label :causa_baja_id, 'Causa de baja' %>
+      <%= f.select :causa_baja_id, options_for_select(CausaBaja.all.collect{|u| ["#{u.nombre}", u.id]}, @colegiado.causa_baja_id), {}, {class: "form-control"} %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group">
+      <%= f.label :regimen_colegiado_id, 'Régimen *' %>
+      <%= f.select :regimen_colegiado_id, options_for_select(RegimenColegiado.all.collect{|u| ["#{u.literal}", u.id]}, @colegiado.regimen_colegiado_id), {}, {class: "form-control"} %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <%= f.label :cuenta_bancaria, 'Cuenta bancaria' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-bank"></i>
+        </div>
+        <%= f.text_field :cuenta_bancaria, class:"form-control", placeholder: "IBAN" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :nif_empresa, 'CIF Empresa' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-credit-card"></i>
+        </div>
+        <%= f.text_field :nif_empresa, class:"form-control", placeholder: "CIF" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :nombre_empresa, 'Empresa' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-industry"></i>
+        </div>
+        <%= f.text_field :nombre_empresa, class: "form-control", placeholder: "Empresa" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group">
+      <%= f.label :numero_archivo, 'Número de archivo' %>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-archive"></i>
+        </div>
+        <%= f.text_field :numero_archivo, class: "form-control", placeholder: "Número de archivo" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :jura, "Año de jura" %>
+      <%= f.select :jura, Date.today.year-30 .. Date.today.year, {}, {class: "form-control"} %>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <%= f.label :epp, 'Año de epp' %>
+      <%= f.select :epp, Date.today.year-30 .. Date.today.year, {}, {class: "form-control"} %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <div class="icheck">
+        <%= f.check_box :excluido_censo %>
+        <%= f.label :excluido_censo, ' Excluir del censo' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <%= f.label :observaciones, 'Observaciones' %>
+      <%= f.text_area :observaciones, class: "form-control", placeholder: "Observaciones sobre el colegiado", rows: 6, cols: 20 %>
+    </div>
+  </div>
+</div>
+<script>
+$(document).on("change","#datepicker_baja",function(e){
+  if (this.value.length > 0) {
+  //if ($("#configurar_persona_checkbox").is(":checked")) {
+    $("#selCausaBaja").removeClass('hidden');
+  } else {
+    $("#selCausaBaja").addClass('hidden');
+  }
+});
+</script>

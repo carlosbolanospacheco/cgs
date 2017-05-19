@@ -1,0 +1,8 @@
+<% if @cargo.errors.size == 0 %>
+  $(".canvas_cargo").empty();
+  $(".box_cargo").addClass('hidden');
+  $(".canvas_listado_cargos").html("<%= escape_javascript(render 'cargos/listado') %>")
+<% else %>
+  $(".canvas_cargo").html("<%= escape_javascript(render '/cargos/form') %>");
+<% end %>
+$(".alerts").html("<%= escape_javascript(render 'shared/alerts') %>")

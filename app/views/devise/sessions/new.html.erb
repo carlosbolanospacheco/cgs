@@ -1,0 +1,43 @@
+<div class="login-box">
+  <div class="login-logo">
+    Colegio de Graduados Sociales de Asturias
+  </div>
+  <div class="login-box-body">
+    <p class="login-box-msg">Inicie sesión para entrar a la aplicación</p>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group has-feedback">
+        <%= f.text_field :login, autofocus: true, class: "form-control", placeholder: "Usuario" %>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Contraseña" %>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <% if devise_mapping.rememberable? -%>
+          <div class="col-xs-8">
+            <div class="checkbox icheck">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          </div>
+        <% end -%>
+        <div class="col-xs-4">
+          <%= f.submit "Entrar", class: "btn btn-primary btn-block btn-flat" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- <%= render "devise/shared/links" %> -->
+
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>

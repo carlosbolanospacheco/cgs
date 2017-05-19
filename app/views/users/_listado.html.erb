@@ -1,0 +1,51 @@
+<table id="listado-usuarios" class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Usuario</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.nombre %></td>
+        <td><%= user.apellidos %></td>
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= user.rol %></td>
+        <td>
+          <%= link_to "", edit_user_path(user), remote: true, class: "fa fa-edit" %>
+        </td>
+        <td>
+          <%= link_to "", user_path(user), remote: true, method: :delete,
+                      class: "fa fa-trash", data: { confirm: '¿Confirma que quiere eliminar el usuario?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+$(document).ready(function () {
+    $("#listado-usuarios").DataTable(
+      {"ordering": false,
+       "language": {
+         "paginate": {
+           "next": "Siguiente",
+           "previous": "Anterior" },
+         "search": "Filtrar usuarios",
+         "info": "Mostrando página _PAGE_ de _PAGES_",
+         "emptyTable": "No existen usuarios",
+         "lengthMenu": "Mostrando _MENU_ usuarios por página",
+         "infoEmpty": "No se muestran usuarios",
+         "infoFiltered": "(filtrado de un total de _MAX_ usuarios)",
+         "zeroRecords": "No existen usuarios que se ajusten a este filtro"
+       }
+      }
+    );
+  });
+</script>

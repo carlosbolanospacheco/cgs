@@ -1,0 +1,84 @@
+<table id="listado-colegiados" class="table table-bordered table-striped" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+  <thead>
+    <tr>
+      <th>Número</th>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>NIF</th>
+      <th>Móvil</th>
+      <th>Régimen</th>
+      <th>Estado</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @colegiados.each do |colegiado| %>
+      <tr>
+        <td><%= colegiado.numero %></td>
+        <td><%= colegiado.nombre_completo %></td>
+        <td><%= colegiado.email %></td>
+        <td><%= colegiado.nif %></td>
+        <td><%= colegiado.telefono_movil %></td>
+        <td><%= colegiado.regimen_colegiado.literal %></td>
+        <td><%= colegiado.estado %></td>
+        <td>
+          <%= link_to '', edit_colegiado_path(colegiado), remote: true, class: "fa fa-edit" %>
+        </td>
+        <td>
+          <%= link_to '', colegiado_path(colegiado), remote: true, method: :delete,
+                      class: "fa fa-trash", data: { confirm: '¿Confirma que quiere eliminar al colegiado?' } %>
+        </td>
+        <td>
+          <div class="dropdown">
+            <%= link_to '', '#', class: "dropdown-toggle fa fa-ellipsis-h", type:"button", id:"acciones_#{colegiado.id}", "data-toggle":"dropdown", "aria-haspopup":"true", 'aria-expanded':'true' %>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="acciones_<%= colegiado.id %>">
+              <li><a href="#">Generar recibo</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Certificado de colegiación</a></li>
+              <li><a href="#">Certificado de cuotas</a></li>
+              <li><a href="#">Cambio de estado</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Domiciliación bancaria</a></li>
+              <li role="separator" class="divider"></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+$(document).ready(function () {
+    $("#listado-colegiados").DataTable( {
+       "lengthMenu": [ [20, 35, 50, -1], [20, 35, 50, "Todos"] ],
+       "ordering": true,
+       "columns": [
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         null,
+         { "orderable": false },
+         { "orderable": false },
+         { "orderable": false }
+       ],
+       "language": {
+         "paginate": {
+           "next": "Siguiente",
+           "previous": "Anterior" },
+         "search": "Buscar en el listado",
+         "info": "Mostrando página _PAGE_ de _PAGES_",
+         "emptyTable": "No existen colegiados",
+         "lengthMenu": "Mostrando _MENU_ colegiados por página",
+         "infoEmpty": "No se muestran colegiados",
+         "infoFiltered": "(sobre un total de _MAX_ colegiados)",
+         "zeroRecords": "No existen colegiados que se ajusten a esta búsqueda"
+       }
+      }
+    );
+  });
+</script>

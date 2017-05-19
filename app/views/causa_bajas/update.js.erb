@@ -1,0 +1,8 @@
+<% if @causa_baja.errors.size == 0 %>
+  $(".canvas_causa_baja").empty();
+  $(".box_causa_baja").addClass('hidden');
+  $(".canvas_listado_causa_bajas").html("<%= escape_javascript(render 'causa_bajas/listado') %>")
+<% else %>
+  $(".canvas_causa_baja").html("<%= escape_javascript(render 'causa_bajas/form') %>");
+<% end %>
+$(".alerts").html("<%= escape_javascript(render 'shared/alerts') %>")

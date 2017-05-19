@@ -1,0 +1,8 @@
+<% if @banco.errors.size == 0 %>
+  $(".canvas_banco").empty();
+  $(".box_banco").addClass('hidden');
+  $(".canvas_listado_bancos").html("<%= escape_javascript(render 'bancos/listado') %>")
+<% else %>
+  $(".canvas_banco").html("<%= escape_javascript(render 'bancos/form') %>");
+<% end %>
+$(".alerts").html("<%= escape_javascript(render 'shared/alerts') %>")

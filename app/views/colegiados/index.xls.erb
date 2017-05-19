@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Colegiados">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Número</Data></Cell>
+        <Cell><Data ss:Type="String">Nombre</Data></Cell>
+        <Cell><Data ss:Type="String">Apellidos</Data></Cell>
+        <Cell><Data ss:Type="String">NIF</Data></Cell>
+        <Cell><Data ss:Type="String">Género</Data></Cell>
+        <Cell><Data ss:Type="String">Fecha de Nacimiento</Data></Cell>
+        <Cell><Data ss:Type="String">Correo electrónico</Data></Cell>
+        <Cell><Data ss:Type="String">Teléfono fijo</Data></Cell>
+        <Cell><Data ss:Type="String">Teléfono móvil</Data></Cell>
+        <Cell><Data ss:Type="String">Fax</Data></Cell>
+        <Cell><Data ss:Type="String">Estado</Data></Cell>
+        <Cell><Data ss:Type="String">Fecha de alta</Data></Cell>
+        <Cell><Data ss:Type="String">Fecha de baja</Data></Cell>
+        <Cell><Data ss:Type="String">Titulación</Data></Cell>
+        <Cell><Data ss:Type="String">Régimen</Data></Cell>
+        <Cell><Data ss:Type="String">Empresa</Data></Cell>
+        <Cell><Data ss:Type="String">CIF Empresa</Data></Cell>
+        <Cell><Data ss:Type="String">Año de Jura</Data></Cell>
+        <Cell><Data ss:Type="String">Año de EPP</Data></Cell>
+        <Cell><Data ss:Type="String">Número de Archivo</Data></Cell>
+        <Cell><Data ss:Type="String">En Censo</Data></Cell>
+      </Row>
+    <% @colegiados.each do |colegiado| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= colegiado.numero %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.apellidos %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.nif %></Data></Cell>
+        <% genero = colegiado.genero == 'M' ? 'Mujer' : 'Hombre' %>
+        <Cell><Data ss:Type="String"><%= genero %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.nacimiento.strftime('%d-%m-%Y') if colegiado.nacimiento %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.telefono_fijo %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.telefono_movil %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.fax %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.estado %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.alta_colegio.strftime('%d-%m-%Y') %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.baja_colegio.strftime('%d-%m-%Y') if colegiado.baja_colegio %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.titulacion.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.regimen_colegiado.literal %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.nombre_empresa %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.nif_empresa %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= colegiado.jura %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= colegiado.epp %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.numero_archivo %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.en_censo? %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

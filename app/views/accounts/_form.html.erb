@@ -1,0 +1,59 @@
+<%= form_for @cuenta, remote:true, html: {autocomplete: 'off'} do |f| %>
+  <div class="box-body">
+    <%= render 'shared/errors', object: f.object %>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :banco_id, "Banco *" %>
+          <%= f.select :banco_id, options_for_select(Banco.all.collect{|u| ["#{u.nombre} (#{u.clave_entidad})", u.id]}, @cuenta.banco_id), {}, {class: "form-control"} %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :oficina, 'Código oficina (4) *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-building-o"></i>
+            </div>
+            <%= f.text_field :oficina, class: "form-control", required: "required", placeholder: "Código numérico" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :digitos_control, 'Dígitos control (2) *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-key"></i>
+            </div>
+            <%= f.text_field :digitos_control, class: "form-control", required: "required", placeholder: "Dígitos de control" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :cuenta, 'Cuenta (10) *' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-globe"></i>
+            </div>
+            <%= f.text_field :cuenta, class:"form-control", placeholder: "Código de cuenta", required: "required" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box-footer">
+      <button type="submit" class="btn btn-success">Guardar</button>
+      <button type="button" class="btn btn-danger cancelButton">Cancelar</button>
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+  $(".cancelButton").click(function(){
+     $(".canvas_cuenta").empty();
+     $(".box_cuenta").addClass('hidden');
+  });
+});
+</script>

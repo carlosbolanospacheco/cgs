@@ -1,0 +1,147 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }, remote: true) do |f| %>
+  <div class="box-body">
+    <div class="alert alert-danger" style="display:none;">
+      <div id="js-error-block">
+        <%= devise_error_messages! %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :avatar, 'Avatar' %><br>
+          <%= image_tag f.object.avatar.url(:thumb), id: "avatar_imagen", class: 'img-circle', size: '150x150' %>
+          <%= f.file_field :avatar, accept: 'image/jpeg,image/gif,image/png' %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :nombre, 'Nombre' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </div>
+            <%= f.text_field :nombre, autofocus: true, class: "form-control", placeholder: "Nombre" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :apellidos, 'Apellidos' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-user-plus"></i>
+            </div>
+            <%= f.text_field :apellidos, class: "form-control", placeholder: "Apellidos" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :email %><br />
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-envelope-o"></i>
+            </div>
+            <%= f.email_field :email, class: "form-control", placeholder: "Correo electrónico" %>
+          </div>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Esperando confirmación de: <%= resource.unconfirmed_email %></div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :username, 'Usuario' %><br />
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-female"></i>
+            </div>
+            <%= f.text_field :username, class: "form-control", placeholder: "Usuario" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <div class="icheck">
+            <%= f.check_box :superadmin_role %>
+            <%= label_tag 'Administrador' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <div class="icheck">
+            <%= f.check_box :supervisor_role %>
+            <%= label_tag 'Supervisor' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <div class="icheck">
+            <%= f.check_box :user_role %>
+            <%= label_tag 'Usuario' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :password, 'Contraseña' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-key"></i>
+            </div>
+            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+          </div>
+          <% if @minimum_password_length %>
+            <p class="help-block"><%= @minimum_password_length %> caracteres al menos</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :password_confirmation, 'Confirmar contraseña' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-key"></i>
+            </div>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+          </div>
+          <p class="help-block">Dejar en blanco si no se quiere cambiar</p>
+        </div>
+      </div>
+      <% if !resource.new_record? %>
+        <div class="col-md-3">
+          <div class="form-group">
+            <%= f.label :current_password, 'Contraseña actual' %>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-key"></i>
+              </div>
+              <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+            </div>
+            <p class="help-block">Necesario para confirmar los cambios</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="box-footer">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-danger cancelButton">Cancelar</button>
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+  $(".cancelButton").click(function(){
+    $.post( "<%= principal_colegiados_path %>", function( data ) {
+    });
+  });
+});
+</script>

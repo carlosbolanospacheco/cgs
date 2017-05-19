@@ -1,0 +1,10 @@
+<% if @user.errors.messages.size > 0 %>
+  <% @user.errors.each do |attr, err| %>
+    $("#js-error-block").append("<%= attr %> <%= err %><br>");
+    $(".alert").show();
+  <% end %>
+<% else %>
+  $(".main-header").html("<%= escape_javascript(render 'layouts/navigation/header') %>");
+  $(".content-wrapper").html("<%= escape_javascript(render 'devise/registrations/edit_user') %>");
+<% end %>
+$(".alerts").html("<%= escape_javascript(render 'shared/alerts') %>");

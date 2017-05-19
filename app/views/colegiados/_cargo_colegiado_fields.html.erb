@@ -1,0 +1,42 @@
+<div class="nested-fields">
+  <div class="row">
+    <div class="box-tools pull-right">
+      <%= link_to_remove_association '', f, class: "fa fa-trash btn btn-box-tool", data: { confirm: "¿Eliminar cargo?" } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group field">
+        <%= f.label :cargo_id, 'Cargo' %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-sitemap"></i>
+          </div>
+          <%= f.text_field :cargo_id, value: f.object.cargo ? f.object.cargo.nombre : @colegiado.cargo_actual, class: "form-control", disabled: '' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group field">
+        <%= f.label :alta, 'Fecha de inicio' %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar-check-o"></i>
+          </div>
+          <%= f.text_field :alta, value: f.object.baja ? f.object.alta.strftime('%d-%m-%Y') : DateTime.now.to_date.strftime('%d-%m-%Y'), class: "form-control", disabled: '' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group field">
+        <%= f.label :baja, 'Fecha de finalización' %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-calendar-times-o"></i>
+          </div>
+          <%= f.text_field :baja, value: f.object.baja ? f.object.baja.strftime('%d-%m-%Y') : 'Cargo actual', class: "form-control", disabled: '' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

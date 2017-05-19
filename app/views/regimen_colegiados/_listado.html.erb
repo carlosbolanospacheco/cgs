@@ -1,0 +1,46 @@
+<table id="listado-regimenes" class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Importe colegio</th>
+      <th>Importe consejo</th>
+      <th>Porcentaje a pagar</th>
+      <th>Periodo de pago</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @regimenes.each do |regimen| %>
+      <tr>
+        <td><%= regimen.literal %></td>
+        <td><%= [regimen.importe_colegio, '€'].join(' ') if regimen.importe_colegio %></td>
+        <td><%= [regimen.importe_consejo, '€'].join(' ') if regimen.importe_consejo %></td>
+        <td><%= [regimen.porcentaje_a_pagar, '%'].join(' ') if regimen.porcentaje_a_pagar %></td>
+        <td><%= regimen.period.nombre if regimen.period %></td>
+        <td>
+          <%= link_to "", edit_regimen_colegiado_path(regimen), remote: true, class: "fa fa-edit" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+$(document).ready(function () {
+    $("#listado-regimenes").DataTable(
+      {"ordering": false,
+       "language": {
+         "paginate": {
+           "next": "Siguiente",
+           "previous": "Anterior" },
+         "search": "Filtrar regímenes",
+         "info": "Mostrando página _PAGE_ de _PAGES_",
+         "emptyTable": "No existen regímenes",
+         "lengthMenu": "Mostrando _MENU_ regímenes por página",
+         "infoEmpty": "No se muestran regímenes",
+         "infoFiltered": "(filtrado de un total de _MAX_ regímenes)",
+         "zeroRecords": "No existen regímenes que se ajusten a este filtro"
+       }
+      }
+    );
+  });
+</script>

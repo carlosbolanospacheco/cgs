@@ -1,0 +1,227 @@
+<div class="modal modal-info" id="modalExportarPDF" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Generación de PDF de Colegiados</h4>
+      </div>
+      <%= form_tag listado_pdf_colegiados_path(format: 'pdf') do %>
+        <div class="modal-body">
+          <p>
+            Seleccione los filtros que se usarán para generar el PDF de Colegiados.
+          </p>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <%= label_tag "Estado" %>
+                <%= select_tag "estado", options_for_select([['Activos', 'alta'], ['Inactivos', 'baja']], 'todos'), {class: "form-control", prompt: 'Selecciona una opción'} %>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <%= label_tag "Régimen" %>
+                <%= select_tag "regimen", options_for_select(RegimenColegiado.all.collect{|u| ["#{u.literal}", u.id]}), {class: "form-control", prompt: 'Selecciona una opción'} %>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <%= label_tag "Antigüedad (años)" %>
+                <%= number_field_tag "antiguedad", 0, min: 0, max: 50, step: 1, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "censo_electoral" %>
+                  <%= label_tag "Censo electoral" %>&nbsp;&nbsp;
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "elegibles" %>
+                  <%= label_tag "Sólo elegibles" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>
+            Seleccione los campos cuya información desea exportar al documento (el número y el nombre del colegiado siemmpren se exportan).
+          </p>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "nif" %>
+                  <%= label_tag "NIF" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "genero" %>
+                  <%= label_tag "Género" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "fecha_nacimiento" %>
+                  <%= label_tag "F. Nacimiento" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "estado_colegiado" %>
+                  <%= label_tag "Estado" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "email" %>
+                  <%= label_tag "Correo Electr." %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "telefono_fijo" %>
+                  <%= label_tag "Teléfono Fijo" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "telefono_movil" %>
+                  <%= label_tag "Teléfono Móvil" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "fax" %>
+                  <%= label_tag "Fax" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "fecha_alta" %>
+                  <%= label_tag "Fecha de Alta" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "fecha_baja" %>
+                  <%= label_tag "Fecha de Baja" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "titulacion" %>
+                  <%= label_tag "Titulación" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "regimen_colegiado" %>
+                  <%= label_tag "Régimen" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "empresa" %>
+                  <%= label_tag "Empresa" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "cif_empresa" %>
+                  <%= label_tag "CIF de Empresa" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "jura" %>
+                  <%= label_tag "Año de Jura" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "epp" %>
+                  <%= label_tag "Año de EPP" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "archivo" %>
+                  <%= label_tag "Núm. de Archivo" %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <div class="icheck">
+                  <%= check_box_tag "censo" %>
+                  <%= label_tag "En Censo" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+          <%= button_tag 'Generar', id: 'generarButton', formtarget: '_blank', class: "btn btn-outline" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+  $("#generarButton").click(function(){
+    $('#modalExportarPDF').modal('toggle');
+  });
+  $('#modalExportarPDF').on('shown.bs.modal', function () {
+    $(this).find('form').trigger('reset');
+  })
+});
+</script>

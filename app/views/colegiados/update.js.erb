@@ -1,0 +1,6 @@
+<% if @colegiado.errors.size == 0 %>
+  $(".content-wrapper").html("<%= escape_javascript(render 'colegiados/principal') %>")
+<% else %>
+  $(".content").html("<%=escape_javascript(render 'colegiados/form')%>")
+<% end %>
+$(".alerts").html("<%= escape_javascript(render 'shared/alerts') %>")

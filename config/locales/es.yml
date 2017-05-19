@@ -1,0 +1,12 @@
+es:
+  admin:
+    actions:
+      dashboard:
+        title: "Panel de control de BBDD"
+  date:
+    formats:
+      default: "%d/%m%/%Y"
+  time:
+    formats:
+      default: "%H:%M:%S"
+  hello: "Hola mundo"

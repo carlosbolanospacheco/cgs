@@ -1,0 +1,59 @@
+<div class="nested-fields">
+  <div class="row">
+    <div class="box-tools pull-right">
+      <%= link_to_remove_association '', f, class: "fa fa-trash btn btn-box-tool", data: { confirm: "¿Eliminar dirección?" } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group field">
+        <%= f.label :descripcion, 'Descripción *' %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-bookmark-o"></i>
+          </div>
+          <%= f.text_field :descripcion, class: "form-control", required: "required", placeholder: "Descripción" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group field">
+        <%= f.label :direccion, 'Dirección *' %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-home"></i>
+          </div>
+          <%= f.text_field :direccion, class: "form-control", required: "required", placeholder: "Dirección" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group field">
+        <%= f.label :codigo_postal, 'Código postal *' %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-envelope"></i>
+          </div>
+          <%= f.text_field :codigo_postal, class: "form-control", required: "required", placeholder: "Código postal" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group field">
+        <%= f.label :provincia_id, "Provincia *" %>
+        <%= f.select :provincia_id, options_for_select(Provincia.all.collect{|u| ["#{u.nombre}", u.id]}, f.object.provincia_id), {}, {class: "form-control"} %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group field">
+        <%= f.label :poblacion, 'Población *' %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-map"></i>
+          </div>
+          <%= f.text_field :poblacion, class: "form-control", required: "required", placeholder: "Población" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

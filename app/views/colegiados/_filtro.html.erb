@@ -1,0 +1,54 @@
+<div class="box-header">
+  <i class="fa fa-filter"></i>
+  <h3 class="box-title">Filtros</h3>
+  <div class="box-tools pull-right">
+    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+  </div>
+</div>
+<%= form_tag("/colegiados/filter", method: 'post', remote: true) do %>
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag "Régimen" %>
+          <%= select_tag "regimen", options_for_select(RegimenColegiado.all.collect{|u| ["#{u.literal}", u.id]}), {class: "form-control", prompt: 'Selecciona una opción'} %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= label_tag "Antigüedad (años)" %>
+          <%= number_field_tag "antiguedad", 0, min: 0, max: 50, step: 1, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag "Estado" %>
+          <%= select_tag "estado", options_for_select([['Activos', 'alta'], ['Inactivos', 'baja']], 'todos'), {class: "form-control", prompt: 'Selecciona una opción'} %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <div class="icheck">
+            <%= check_box_tag "censo_electoral" %>
+            <%= label_tag "Censo electoral" %>&nbsp;&nbsp;
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <div class="icheck">
+            <%= check_box_tag "elegibles" %>
+            <%= label_tag "Sólo elegibles" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-footer">
+    <div class="row">
+      <div class="col-md-2">
+        <%= submit_tag "Filtrar", class: "btn btn-info" %>
+      </div>
+    </div>
+  </div>
+<% end %>

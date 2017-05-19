@@ -1,0 +1,28 @@
+<section class="content-header">
+  <h1>
+    Entidades bancarias
+    <small>Gestión de entidades bancarias</small>
+  </h1>
+</section>
+<section class="content">
+  <div class="box">
+    <div class="box-body pad table-responsive">
+      <%= link_to " Crear una nueva entidad bancaria", new_banco_path, remote: true, class: "btn btn-block btn-info btn-lg fa fa-plus" %>
+    </div>
+  </div>
+
+  <div class="box hidden box_banco">
+    <div class="box-body canvas_banco">
+    </div>
+  </div>
+
+  <div class="box box-primary">
+    <div class="box-header">
+      <i class="fa fa-money"></i>
+      <h3 class="box-title">Listado de entidades bancarias</h3>
+    </div>
+    <div class="box-body canvas_listado_bancos">
+      <%= render 'bancos/listado' %>
+    </div>
+  </div>
+</section>
