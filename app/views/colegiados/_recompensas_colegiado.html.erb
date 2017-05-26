@@ -1,0 +1,28 @@
+<div class="box-header">
+  <i class="fa fa-money"></i>
+  <h3 class="box-title">Histórico de Cargos y Recompensas</h3>
+  <div class="box-tools pull-right">
+    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+  </div>
+</div>
+<div class="box-body">
+  <div class="row">
+    <%= f.fields_for :recompensa_colegiados do |recompensa| %>
+      <div class="col-md-11">
+        <div class="form-group">
+          <%= render 'colegiados/recompensa_colegiado_fields', f: recompensa %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="box-footer">
+  <div class="row">
+    <div class="col-md-11">
+      <div class="form-group">
+        <%= link_to_add_association "Añadir Cargo / Recompensa", f, :recompensa_colegiados, class: "btn btn-sm btn-info" %>
+      </div>
+    </div>
+  </div>
+</div>

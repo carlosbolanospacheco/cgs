@@ -9,13 +9,22 @@
     <li class="treeview">
       <a>
         <i class="fa fa-file-excel-o"></i>
-        Recibos y Documentos
+        Documentos generales
         <i class="fa fa-angle-left pull-right"></i>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#">Totales</a></li>
-        <li><a href="#">Liquidación mensual consejo</a></li>
-        <li><a href="#">Comunicaciones y documentos</a></li>
+        <li>
+          <%= link_to 'Junta de Gobierno', documento_pdf_colegios_path(documento_id: Documento.find_by(codigo: 'junta_gobierno')), remote: true, method: :post %>
+        </li>
+        <li>
+          <%= link_to 'Junta General Ordinaria', documento_pdf_colegios_path(documento_id: Documento.find_by(codigo: 'junta_general')), remote: true, method: :post %>
+        </li>
+        <li>
+          <%= link_to 'Generar Modelo 13', documento_pdf_colegios_path(documento_id: Documento.find_by(codigo: 'modelo_13')), remote: true, method: :post %>
+        </li>
+        <li>
+          <%= link_to "Etiquetas", etiquetas_colegiados_path(format: 'pdf'), target: '_blank' %>
+        </li>
       </ul>
     </li>
     <li class="treeview">
@@ -42,6 +51,9 @@
         </li>
         <li>
           <%= link_to "Cuentas bancarias", accounts_path, remote: true %>
+        </li>
+        <li>
+          <%= link_to "Gestión de firmas", documentos_path, remote: true %>
         </li>
       </ul>
     </li>

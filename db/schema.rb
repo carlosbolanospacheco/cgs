@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519111039) do
+ActiveRecord::Schema.define(version: 20170526133416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20170519111039) do
     t.string   "sufijo"
     t.string   "url"
     t.integer  "antiguedad_elegible",         default: 2
+    t.string   "email"
   end
 
   create_table "direccion_colegiados", force: :cascade do |t|
@@ -124,6 +125,25 @@ ActiveRecord::Schema.define(version: 20170519111039) do
     t.string  "codigo_postal"
     t.boolean "principal"
     t.index ["colegiado_id"], name: "index_direccion_colegiados_on_colegiado_id", using: :btree
+  end
+
+  create_table "documento_colegiados", force: :cascade do |t|
+    t.integer  "colegiado_id"
+    t.string   "nombre_documento"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "documento_id"
+  end
+
+  create_table "documentos", force: :cascade do |t|
+    t.string   "nombre"
+    t.integer  "firma_1_cargo_id"
+    t.integer  "firma_2_cargo_id"
+    t.boolean  "documento_personal", default: true
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "codigo"
+    t.string   "plantilla"
   end
 
   create_table "movimiento_colegiados", force: :cascade do |t|
@@ -148,6 +168,15 @@ ActiveRecord::Schema.define(version: 20170519111039) do
   create_table "provincias", force: :cascade do |t|
     t.string "codigo"
     t.string "nombre"
+  end
+
+  create_table "recibo_colegiados", force: :cascade do |t|
+    t.integer  "colegiado_id"
+    t.string   "codigo_factura"
+    t.string   "concepto"
+    t.float    "importe"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "recompensa_colegiados", force: :cascade do |t|

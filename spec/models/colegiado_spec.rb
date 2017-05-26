@@ -1,6 +1,6 @@
-require 'colegiado'
+require 'rails_helper'
 
-describe Colegiado do
+RSpec.describe Colegiado, type: :model do
   before do
     @colegiado = Colegiado.new(numero: 123,
                                nombre: 'Carlos',
@@ -10,6 +10,6 @@ describe Colegiado do
   end
 
   it 'Valida la creación de un colegiado' do
-    expect(colegiado.done?).to be_truthy
+    expect(@colegiado.done?).to be_truthy
   end
 end

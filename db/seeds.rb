@@ -57,11 +57,12 @@ Provincia.create(codigo: '52', nombre: 'Melilla')
 
 Colegio.create(nombre: 'Colegio de Graduados Sociales de Asturias',
                direccion: 'Cervantes, 28 - 1º. F.',
-               localidad: 'Oviedo',
+               poblacion: 'Oviedo',
                codigo_postal: '33004',
                provincia_id: 5,
                cif: 'Q-3369005H',
-               url: 'www.graduadosocialasturias.es',
+               url: 'http://www.graduadosocialasturias.es',
+               email: 'info@graduadosocialasturias.es',
                telefono: '985 277 873',
                fax: '985 234 161')
 
@@ -316,14 +317,14 @@ Period.create(nombre: 'Bimestral', multiplicador: 2)
 Period.create(nombre: 'Trimestral', multiplicador: 3)
 Period.create(nombre: 'Semestral', multiplicador: 6)
 
-RegimenColegiado.create(literal: 'Ejerciente libre')
-RegimenColegiado.create(literal: 'Ejerciente por cuenta ajena')
-RegimenColegiado.create(literal: 'Emérito')
-RegimenColegiado.create(literal: 'No jerciente')
-RegimenColegiado.create(literal: 'Precolegiado')
+RegimenColegiado.create(literal: 'Ejerciente libre', period_id: Period.first.id)
+RegimenColegiado.create(literal: 'Ejerciente por cuenta ajena', period_id: Period.first.id)
+RegimenColegiado.create(literal: 'Emérito', period_id: Period.first.id)
+RegimenColegiado.create(literal: 'No jerciente', period_id: Period.first.id)
+RegimenColegiado.create(literal: 'Precolegiado', period_id: Period.first.id)
 
 Titulacion.create(nombre: 'Escuela Social')
-Titulacion.create(nombre: 'Diplomado')
+Titulacion.create(nombre: 'Graduado Social Diplomado')
 Titulacion.create(nombre: 'Diplomado en Relaciones Laborales')
 Titulacion.create(nombre: 'Grado en Relaciones Laborales y Recursos Humanos')
 
@@ -336,5 +337,18 @@ User.create! do |u|
   u.email     = 'test@cgs.es'
   u.username  = 'admin_test'
   u.password  = 'password'
+  u.password_confirmation = 'password'
   u.superadmin_rol = true
 end
+
+Documento.create(nombre: 'Cambio de estado', codigo: 'cambio_estado', plantilla: 'plantilla_colegiado', documento_personal: true)
+Documento.create(nombre: 'Cambio de régimen', codigo: 'cambio_regimen', plantilla: 'plantilla_colegiado', documento_personal: true)
+Documento.create(nombre: 'Certificado de colegiación', codigo: 'certificado_colegiacion', plantilla: 'plantilla_colegiado', documento_personal: true)
+Documento.create(nombre: 'Certificado de cuotas', codigo: 'certificado_cuotas', plantilla: 'plantilla_colegiado', documento_personal: true)
+Documento.create(nombre: 'Recibo Manual', codigo: 'recibo', plantilla: 'plantilla_recibo', documento_personal: true)
+Documento.create(nombre: 'Convocatoria de Junta de Gobierno', codigo: 'junta_gobierno', plantilla: 'plantilla_junta', documento_personal: false)
+Documento.create(nombre: 'Convocatoria de Junta General Ordinaria', codigo: 'junta_general', plantilla: 'plantilla_junta', documento_personal: false)
+Documento.create(nombre: 'Modelo 13', codigo: 'modelo_13', plantilla: 'plantilla_modelo_13', documento_personal: true)
+Documento.create(nombre: 'Domiciliación Bancaria', codigo: 'domiciliacion_bancaria', plantilla: 'plantilla_domiciliacion', documento_personal: true)
+Documento.create(nombre: 'Etiquetas', codigo: 'etiqueta', plantilla: 'plantilla_etiqueta', documento_personal: false)
+Documento.create(nombre: 'Listado de Colegiados', codigo: 'listado', plantilla: 'plantilla_listado', documento_personal: false)

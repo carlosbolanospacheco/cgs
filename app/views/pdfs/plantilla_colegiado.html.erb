@@ -1,0 +1,14 @@
+<%= render template: 'pdfs/cabecera', locals: { colegio: Colegio.first } %>
+<%= render template: 'pdfs/direccion_colegiado', locals: { colegiado: colegiados } %>
+<br>
+<% if documento.codigo == 'recibo' %>
+  <%= render template: 'pdfs/cuerpo_recibo', locals: { colegiado: colegiados, parametros: parametros } %>
+<% else %>
+  <%== parametros['cuerpoDocumento'] %>
+<% end %>
+<br><br>
+<%= render template: 'pdfs/firma', locals: { documento: documento, host: host, port: port } %>
+<% if documento.codigo == 'recibo' %>
+  <br><br><br>
+  <p><strong><font size="1">El presente recibo podrá hacerse efectivo bien en el Colegio o mediante transferencia a través del mismo. Carecerá de validez si no está firmado y sellado por el expedidor o vaya acompañado de un justificante de la transferencia</font></strong></p>
+<% end %>

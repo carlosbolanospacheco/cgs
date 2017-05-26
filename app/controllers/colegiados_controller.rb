@@ -3,6 +3,9 @@ class ColegiadosController < ApplicationController
   load_and_authorize_resource
   before_action :set_colegiado, only: %i[edit update destroy]
 
+  def show
+  end
+
   def index
     @colegiados = Colegiado.all
   end
@@ -60,6 +63,29 @@ class ColegiadosController < ApplicationController
     @colegiados = Colegiado.all
   end
 
+  def mostrar_documento
+    documento = DocumentoColegiado.find(params['documento_id'])
+    send_file documento.obtener_ruta,
+              filename: documento.nombre_documento,
+              type: 'application/pdf',
+              disposition: 'inline'
+
+  end
+
+  def presentar_documento
+    @colegio = Colegio.first
+    @colegiado = Colegiado.find(params['colegiado_id'])
+    @documento = Documento.find(params['documento_id'])
+    logger.debug("Documento #{@documento.codigo}")
+    if @documento.codigo != 'recibo'
+      @documento_html = ApplicationController.render(template: cuerpo_documento,
+                                                     layout: false,
+                                                     assigns: { colegio: @colegio,
+                                                                colegiado: @colegiado,
+                                                                documento: @documento })
+    end
+  end
+
   private
 
   def colegiado_params
@@ -69,7 +95,7 @@ class ColegiadosController < ApplicationController
             :jura, :epp, :nombre_empresa, :nif_empresa, :observaciones, :excluido_censo,
             :titulacion_id, :numero_archivo, :causa_baja_id,
             direccion_colegiados_attributes: %i[id descripcion direccion codigo_postal
-                                                provincia_id poblacion _destroy],
+                                                provincia_id poblacion principal _destroy],
             cargo_colegiados_attributes: %i[id _destroy colegiado_id cargo_id],
             movimiento_colegiados_attributes: %i[id _destroy observaciones colegiado_id
                                                  tipo_movimiento_id regimen_colegiado_id],
@@ -80,6 +106,10 @@ class ColegiadosController < ApplicationController
   def filter_params
     keys = %i[regimen antiguedad estado censo_electoral elegibles]
     params.permit(keys)
+  end
+
+  def cuerpo_documento
+    "pdfs/cuerpo_#{@documento.codigo}"
   end
 
   def identificar_movimientos

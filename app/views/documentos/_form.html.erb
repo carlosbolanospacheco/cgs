@@ -1,0 +1,44 @@
+<%= form_for @documento, remote:true, html: {autocomplete: 'off'} do |f| %>
+  <div class="box-body">
+    <%= render 'shared/errors', object: f.object %>
+    <%= f.hidden_field(:codigo) %>
+    <%= f.hidden_field(:plantilla) %>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :nombre, 'Nombre' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-file-pdf-o"></i>
+            </div>
+            <%= f.text_field :nombre, class: "form-control", required: "required", disabled: '' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :firma_1_cargo_id, "Firma 1" %>
+          <%= f.select :firma_1_cargo_id, options_for_select(Cargo.all.collect{|u| ["#{u.nombre}", u.id]}.insert(0, 'Seleccione un cargo'), @documento.firma_1_cargo_id ? @documento.firma_1_cargo_id : ''), {}, {class: "form-control", prompt: 'Selecciona una opción'} %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= f.label :firma_2_cargo_id, "Firma 2" %>
+          <%= f.select :firma_2_cargo_id, options_for_select(Cargo.all.collect{|u| ["#{u.nombre}", u.id]}.insert(0, 'Seleccione un cargo'), @documento.firma_2_cargo_id ? @documento.firma_2_cargo_id : ''), {}, {class: "form-control", prompt: 'Selecciona una opción'} %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-footer">
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <button type="button" class="btn btn-danger cancelButton">Cancelar</button>
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+    $(".cancelButton").click(function(){
+       $(".canvas_documento").empty();
+       $(".box_documento").addClass('hidden');
+    });
+  });
+</script>

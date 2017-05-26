@@ -1,0 +1,20 @@
+<table width="100%">
+  <tr style="text-align:right">
+    <td><strong><%= colegiado.nombre_completo %></strong></td>
+  </tr>
+  <tr style="text-align:right">
+    <td>NIF: <strong><%= colegiado.nif %></strong></td>
+  </tr>
+  <tr style="text-align:right">
+    <td>Colegiado Nº <strong><%= colegiado.numero %></strong></td>
+  </tr>
+  <tr style="text-align:right">
+    <td>
+      <% if colegiado.direccion_principal %>
+        <%= colegiado.direccion_principal.direccion %><br>
+        <%= colegiado.direccion_principal.codigo_postal %>,&nbsp;<%= colegiado.direccion_principal.poblacion %><br>
+        <%= colegiado.direccion_principal.provincia.nombre %>
+      <% end %>
+    </td>
+  </tr>
+</table>

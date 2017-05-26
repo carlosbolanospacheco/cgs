@@ -1,0 +1,7 @@
+<p>La Junta de Gobierno de este Colegio, en reunión celebrada el día <u><%= l(DateTime.now.to_date, format:'%d de %B de %Y') %></u>, examinó su instancia solicitando el cambio en esta Corporación Profesional y después de estudiar los documentos y antecedentes que en su caso concurren, acordó aprobar su cambio a colegiado <strong><%= @colegiado.regimen_colegiado.literal %></strong> con fecha <u><%= l(DateTime.now.to_date, format:'%d de %B de %Y') %></u>.</p>
+<p>Así mismo le recordamos que, para ejercer y desarrollar las funciones inherentes al título de <%= @colegiado.titulacion.nombre %>, es obligatoria la colegiación en alguna de las siguientes modalidades:</p>
+<ul><li>Ejerciente Libre</li><li>Ejerciente Empresa</li><li>Habilitado</li></ul>
+<p>De conformidad con los vigentes Estatutos de los Colegios Oficiales de Graduados Sociales, doy traslado a usted de este acuerdo, con el Visto Bueno de la Presidencia.</p>
+<br>
+Oviedo, a <%= l(DateTime.now.to_date, format:'%d de %B de %Y') %>
+<br>

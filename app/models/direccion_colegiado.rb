@@ -1,4 +1,4 @@
-# :nodoc:
+# Direcciones postales de los colegiados
 class DireccionColegiado < ApplicationRecord
   belongs_to :colegiado, inverse_of: :direccion_colegiados
   belongs_to :provincia

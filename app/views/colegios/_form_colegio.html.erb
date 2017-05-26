@@ -118,6 +118,28 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :url, 'Dirección Web' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-tablet"></i>
+            </div>
+            <%= f.text_field :url, class: "form-control", placeholder: "Dirección Web" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.label :email, 'Correo Electrónico' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-envelope"></i>
+            </div>
+            <%= f.text_field :email, class: "form-control", placeholder: "Correo Electrónico" %>
+          </div>
+        </div>
+      </div>
       <div class="col-md-2">
         <div class="form-group">
           <%= f.label :antiguedad_elegible, 'Años mínimos censo *' %>

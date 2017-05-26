@@ -1,0 +1,44 @@
+<table id="listado-documentos" class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Firma 1</th>
+      <th>Firma 2</th>
+      <th>Individual</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @documentos.each do |documento| %>
+      <tr>
+        <td><%= documento.nombre %></td>
+        <td><%= documento.firma_1_cargo.nombre if documento.firma_1_cargo %></td>
+        <td><%= documento.firma_2_cargo.nombre if documento.firma_2_cargo%></td>
+        <td><%= documento.individual? %></td>
+        <td>
+          <%= link_to "", edit_documento_path(documento), remote: true, class: "fa fa-edit" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+$(document).ready(function () {
+    $("#listado-documentos").DataTable(
+      {"ordering": false,
+       "language": {
+         "paginate": {
+           "next": "Siguiente",
+           "previous": "Anterior" },
+         "search": "Filtrar documentos",
+         "info": "Mostrando página _PAGE_ de _PAGES_",
+         "emptyTable": "No existen documentos",
+         "lengthMenu": "Mostrando _MENU_ documentos por página",
+         "infoEmpty": "No se muestran documentos",
+         "infoFiltered": "(filtrado de un total de _MAX_ documentos)",
+         "zeroRecords": "No existen documentos que se ajusten a este filtro"
+       }
+      }
+    );
+  });
+</script>

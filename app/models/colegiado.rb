@@ -12,6 +12,7 @@ class Colegiado < ApplicationRecord
   has_many :cargo_colegiados, inverse_of: :colegiado, dependent: :destroy
   has_many :movimiento_colegiados, inverse_of: :colegiado, dependent: :destroy
   has_many :recompensa_colegiados, inverse_of: :colegiado, dependent: :destroy
+  has_many :documento_colegiados, inverse_of: :colegiado, dependent: :destroy
   # Campos y validaciones
   accepts_nested_attributes_for :direccion_colegiados,
                                 allow_destroy: true,
@@ -64,14 +65,26 @@ class Colegiado < ApplicationRecord
     [apellidos, nombre].compact.join(', ')
   end
 
+  def nombre_texto
+    [nombre, apellidos].compact.join(' ')
+  end
+
   def estado
     return 'alta' unless baja_colegio
     'baja'
   end
 
+  def importe_recibos
+    documento_colegiados.solo_recibos.inject(0) { |sum, recibo| sum + recibo.importe }
+  end
+
   def cargo_actual
     puesto_actual = cargo_colegiados.select(&:fecha_baja).first
     puesto_actual ? puesto_actual.cargo.nombre : 'Sin Cargo'
+  end
+
+  def direccion_principal
+    direccion_colegiados.select(&:principal).first
   end
 
   def en_censo?

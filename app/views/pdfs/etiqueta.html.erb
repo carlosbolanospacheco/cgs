@@ -1,0 +1,21 @@
+<table border="1">
+<% elemento = 0 %>
+<% colegiados.each do |colegiado| %>
+  <% if colegiado.direccion_principal %>
+    <% if elemento == 0 %>
+      <tr>
+    <% end %>
+    <td class="td_etiqueta">
+        <%= colegiado.nombre_completo %><br>
+        <%= colegiado.direccion_principal.direccion %><br>
+        <%= colegiado.direccion_principal.codigo_postal %>,&nbsp;<%= colegiado.direccion_principal.poblacion %><br>
+        <%= colegiado.direccion_principal.provincia.nombre %>
+    </td>
+    <% elemento += 1 %>
+    <% if elemento == 4 %>
+      </tr>
+      <% elemento = 0 %>
+    <% end %>
+  <% end %>
+<% end %>
+</table>

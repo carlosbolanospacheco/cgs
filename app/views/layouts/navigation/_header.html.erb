@@ -1,4 +1,7 @@
-<%= link_to 'CGS', root_path, class: 'logo', remote: true %>
+<%= link_to root_path, class: 'logo text-nowrap text-center', remote: true do %>
+  <%= image_tag 'logos/logo_cgs.png', alt: 'Ir al listado de Colegiados', class: 'img-circle', size: '45x45' %>
+  <small style="word-wrap: break-word;word-break: break-all;">CGSA</small>
+<% end %>
 <nav class="navbar navbar-static-top" role="navigation">
   <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">

@@ -1,0 +1,8 @@
+<% if @documento.firma_1_cargo ||  @documento.firma_2_cargo %>
+  <% nombre_cargo = documento.firma_1_cargo ? documento.firma_1_cargo.colegiado.nombre_texto : documento.firma_2_cargo.colegiado.nombre_texto %>
+  <% cargo = documento.firma_1_cargo ? documento.firma_1_cargo.nombre : documento.firma_2_cargo.nombre %>
+  <p><%= nombre_cargo %> <%= cargo %> del <%= @colegio.nombre %>, corporación de derecho público,</p>
+<% end %>
+<br><br>
+<strong>CERTIFICA:</strong>
+<br><br>

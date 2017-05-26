@@ -1,0 +1,19 @@
+<h1>Recibo <%= parametros['codigo_recibo'] %></h1>
+<br><br>
+<p>En Oviedo, a <%= l(DateTime.now.to_date, format:'%d de %B de %Y') %></p>
+<br><br>
+<table border="1" width="100%">
+  <thead>
+    <tr>
+      <th width="75%">Concepto</th>
+      <th>Importe</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= parametros['concepto'] %></td>
+      <td><%= parametros['importe'] %>€</td>
+    </tr>
+  </tbody>
+</table>
+<br>

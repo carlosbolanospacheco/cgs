@@ -1,0 +1,8 @@
+<% if @documento.errors.size == 0 %>
+  $(".canvas_documento").empty();
+  $(".box_documento").addClass('hidden');
+  $(".canvas_listado_documentos").html("<%= escape_javascript(render 'documentos/listado') %>")
+<% else %>
+  $(".canvas_documento").html("<%= escape_javascript(render 'documentos/form') %>");
+<% end %>
+$(".alerts").html("<%= escape_javascript(render 'shared/alerts') %>")

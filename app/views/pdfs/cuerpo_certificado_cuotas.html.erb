@@ -1,0 +1,4 @@
+<%= render template: 'pdfs/cabecera_certificados', locals: { documento: @documento } %>
+<p>Que según consta en los archivos administrativos de este Colegio Oficial, <strong><%= @colegiado.nombre_texto %></strong> con Documento Nacional de Identidad <strong><%= @colegiado.nif %></strong> y colegiado/a con el número <strong><%= @colegiado.numero %></strong>, ha abonado en concepto de cuotas colegiales durante el año <strong><%= DateTime.now.year %></strong> la cantidad de <strong>0 €</strong></p>
+<br>
+<p>Y para que así conste y surta los efectos oportunos donde proceda, firmo el presente <strong>CERTIFICADO</strong> en Oviedo, a <%= l(DateTime.now.to_date, format:'%d de %B de %Y') %></p>

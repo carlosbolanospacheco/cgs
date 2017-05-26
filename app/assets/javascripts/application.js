@@ -28,6 +28,7 @@
 //= require jquery.inputmask.numeric.extensions
 //= require jquery.inputmask.regex.extensions
 //= require jquery.inputmask.phone.extensions
+//= require bootstrap3-wysihtml5.all
 //= require cocoon
 //= require toastr
 //= require jquery.remotipart

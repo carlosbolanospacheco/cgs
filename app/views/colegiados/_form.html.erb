@@ -16,117 +16,32 @@
   <% if !@colegiado.new_record? %>
 
     <div class="box collapsed-box">
-      <div class="box-header">
-        <i class="fa fa-home"></i>
-        <h3 class="box-title">Direcciones</h3>
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-        </div>
-      </div>
-      <div class="box-body">
-        <div class="row">
-          <%= f.fields_for :direccion_colegiados do |direccion| %>
-            <div class="col-md-11">
-              <div class="form-group">
-                <%= render 'colegiados/direccion_colegiado_fields', f: direccion %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="box-footer">
-        <div class="row">
-          <div class="col-md-11">
-            <div class="form-group">
-              <%= link_to_add_association "Añadir dirección", f, :direccion_colegiados, class: "btn btn-sm btn-info" %>
-            </div>
-          </div>
-        </div>
-      </div>
+      <%= render 'colegiados/direcciones_colegiado', f: f %>
     </div>
 
     <div class="box collapsed-box">
-      <div class="box-header">
-        <i class="fa fa-money"></i>
-        <h3 class="box-title">Histórico de Cargos y Recompensas</h3>
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-        </div>
-      </div>
-      <div class="box-body">
-        <div class="row">
-          <%= f.fields_for :recompensa_colegiados do |recompensa| %>
-            <div class="col-md-11">
-              <div class="form-group">
-                <%= render 'colegiados/recompensa_colegiado_fields', f: recompensa %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="box-footer">
-        <div class="row">
-          <div class="col-md-11">
-            <div class="form-group">
-              <%= link_to_add_association "Añadir Cargo / Recompensa", f, :recompensa_colegiados, class: "btn btn-sm btn-info" %>
-            </div>
-          </div>
-        </div>
-      </div>
+      <%= render 'colegiados/recompensas_colegiado', f: f %>
     </div>
 
     <div class="box collapsed-box">
-      <div class="box-header">
-        <i class="fa fa-refresh"></i>
-        <h3 class="box-title">Histórico del Colegiado</h3>
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-        </div>
-      </div>
-      <div class="box-body">
-        <div class="row">
-          <%= f.fields_for :movimiento_colegiados do |movimiento_colegiado| %>
-            <div class="col-md-11">
-              <div class="form-group">
-                <%= render 'colegiados/movimiento_colegiado_fields', f: movimiento_colegiado %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="box-footer">
-        <div class="row">
-          <div class="col-md-11">
-            <div class="form-group">
-              <%= link_to_add_association "Añadir movimiento", f, :movimiento_colegiados, class: "btn btn-sm btn-info" %>
-            </div>
-          </div>
-        </div>
-      </div>
+      <%= render 'colegiados/movimientos_colegiado', f: f %>
     </div>
+
+    <% if @colegiado.documento_colegiados.solo_recibos.length > 0 %>
+      <div class="box collapsed-box">
+        <%= render 'colegiados/recibos_colegiado.html.erb', f: f %>
+      </div>
+    <% end %>
+
+    <% if @colegiado.documento_colegiados.sin_recibos.length > 0 %>
+      <div class="box collapsed-box">
+        <%= render 'colegiados/documentos_colegiado.html.erb', f: f %>
+      </div>
+    <% end %>
 
     <% if @colegiado.cargo_colegiados.length > 0 %>
       <div class="box collapsed-box">
-        <div class="box-header">
-          <i class="fa fa-sitemap"></i>
-          <h3 class="box-title">Histórico de Cargos en el Colegio</h3>
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          <div class="row">
-            <%= f.fields_for :cargo_colegiados do |cargo_colegiado| %>
-              <div class="col-md-11">
-                <div class="form-group">
-                  <%= render 'colegiados/cargo_colegiado_fields', f: cargo_colegiado %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
+        <%= render 'colegiados/cargos_colegiado.html.erb', f: f %>
       </div>
     <% end %>
 

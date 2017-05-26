@@ -1,0 +1,31 @@
+.etiqueta{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    width: 2.025in;
+    height: .875in;
+    padding: .125in .3in 0;
+    float: left;
+    /*overflow: hidden;*/
+    margin-right: .1in;
+    margin-bottom: .1in;
+    text-align: center;
+    outline: 1px dotted;
+}
+.page-break  {
+    clear: left;
+    display:block;
+    page-break-after:always;
+}
+table, tr, td, th, tbody, thead, tfoot {
+  page-break-inside: avoid !important;
+}
+.tr_etiqueta {
+  height: 25.4mm;
+  table-layout:fixed
+}
+.td_etiqueta {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  width: 48.5mm;
+  text-align: center;
+}

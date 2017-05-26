@@ -1,0 +1,6 @@
+$("#box_documento").removeClass('hidden');
+<% if @documento.codigo == 'recibo' %>
+  $("#canvas_documento").html("<%=escape_javascript(render template: 'colegiados/form_recibo_pdf', locals: { documento: @documento, colegiado: @colegiado, contenido_documento: @documento_html }) %>");
+<% else %>
+  $("#canvas_documento").html("<%=escape_javascript(render template: 'colegiados/form_edit_pdf', locals: { documento: @documento, colegiado: @colegiado, contenido_documento: @documento_html }) %>");
+<% end %>

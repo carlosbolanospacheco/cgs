@@ -1,0 +1,52 @@
+<div class="box-header">
+  <i class="fa fa-book"></i>
+  <h3 class="box-title">Documentos Generados</h3>
+  <div class="box-tools pull-right">
+    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+  </div>
+</div>
+<div class="box-body">
+  <div class="row">
+    <div class="col-md-12">
+      <table id="listado-documentos" class="table table-bordered table-striped" data-page-length='25'>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @colegiado.documento_colegiados.sin_recibos.each do |documento| %>
+            <tr>
+              <td><%= link_to documento.nombre_documento, mostrar_documento_colegiados_path(documento_id: documento), target: :_blank, format: :pdf %></td>
+              <td><%= documento.documento.nombre %></td>
+              <td><%= documento.created_at.strftime('%d-%m-%Y') %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function () {
+    $("#listado-documentos").DataTable( {
+       "lengthMenu": [ [20, 35, 50, -1], [20, 35, 50, "Todos"] ],
+       "ordering": true,
+       "language": {
+         "paginate": {
+           "next": "Siguiente",
+           "previous": "Anterior" },
+         "search": "Buscar en el listado",
+         "info": "Mostrando página _PAGE_ de _PAGES_",
+         "emptyTable": "No existen documentos",
+         "lengthMenu": "Mostrando _MENU_ documentos por página",
+         "infoEmpty": "No se muestran documentos",
+         "infoFiltered": "(sobre un total de _MAX_ documentos)",
+         "zeroRecords": "No existen documentos que se ajusten a esta búsqueda"
+       }
+      }
+    );
+  });
+</script>

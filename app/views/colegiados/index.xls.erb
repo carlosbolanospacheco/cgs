@@ -28,6 +28,10 @@
         <Cell><Data ss:Type="String">Año de EPP</Data></Cell>
         <Cell><Data ss:Type="String">Número de Archivo</Data></Cell>
         <Cell><Data ss:Type="String">En Censo</Data></Cell>
+        <Cell><Data ss:Type="String">Dirección</Data></Cell>
+        <Cell><Data ss:Type="String">Población</Data></Cell>
+        <Cell><Data ss:Type="String">Código Postal</Data></Cell>
+        <Cell><Data ss:Type="String">Provincia</Data></Cell>
       </Row>
     <% @colegiados.each do |colegiado| %>
       <Row>
@@ -35,8 +39,7 @@
         <Cell><Data ss:Type="String"><%= colegiado.nombre %></Data></Cell>
         <Cell><Data ss:Type="String"><%= colegiado.apellidos %></Data></Cell>
         <Cell><Data ss:Type="String"><%= colegiado.nif %></Data></Cell>
-        <% genero = colegiado.genero == 'M' ? 'Mujer' : 'Hombre' %>
-        <Cell><Data ss:Type="String"><%= genero %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= colegiado.genero == 'M' ? 'Mujer' : 'Hombre' %></Data></Cell>
         <Cell><Data ss:Type="String"><%= colegiado.nacimiento.strftime('%d-%m-%Y') if colegiado.nacimiento %></Data></Cell>
         <Cell><Data ss:Type="String"><%= colegiado.email %></Data></Cell>
         <Cell><Data ss:Type="String"><%= colegiado.telefono_fijo %></Data></Cell>
@@ -53,6 +56,12 @@
         <Cell><Data ss:Type="Number"><%= colegiado.epp %></Data></Cell>
         <Cell><Data ss:Type="String"><%= colegiado.numero_archivo %></Data></Cell>
         <Cell><Data ss:Type="String"><%= colegiado.en_censo? %></Data></Cell>
+        <% if colegiado.direccion_principal %>
+          <Cell><Data ss:Type="String"><%= colegiado.direccion_principal.direccion %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= colegiado.direccion_principal.poblacion %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= colegiado.direccion_principal.codigo_postal %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= colegiado.direccion_principal.provincia.nombre %></Data></Cell>
+        <% end %>
       </Row>
     <% end %>
     </Table>

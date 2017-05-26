@@ -1,0 +1,56 @@
+<div class="box-header">
+  <h3 class="modal-title">Crear un recibo</h3>
+  <small>Indique los valores pare el recibo a generar para el colegiado <%= colegiado.nombre_texto %></small>
+</div>
+<%= form_tag documento_pdf_colegiados_path(format: 'pdf', documento_id: documento, colegiado_id: colegiado) do %>
+  <div class="box-body pad">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag 'Código de recibo' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-paw"></i>
+            </div>
+            <%= text_field_tag 'codigo_recibo', '', class: "form-control", required: "required", placeholder: "Número de recibo" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= label_tag 'Concepto' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </div>
+            <%= text_field_tag 'concepto', '', class: "form-control", required: "required", placeholder: "Concepto del recibo" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag 'Importe' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-user-plus"></i>
+            </div>
+            <%= text_field_tag 'importe', '', class: "form-control", required: "required", placeholder: "Importe del recibo" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="box-footer">
+    <%= button_tag 'Generar', id: 'generarButton', formtarget: '_blank', class: "btn btn-success" %>
+    <button type="button" class="btn btn-danger cancelEditButton">Cancelar</button>
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+  $(".cancelEditButton").click(function(){
+    $("#canvas_documento").empty();
+    $("#box_documento").addClass('hidden');
+  });
+});
+</script>
