@@ -23,3 +23,67 @@
   </div>
 </div>
 <%= render 'colegiados/modal_export_pdf' %>
+<script>
+$(document).ready(function () {
+    var table = $("#listado-colegiados").DataTable({
+      "lengthMenu": [ [20, 35, 50, -1], [20, 35, 50, "Todos"] ],
+      "columns": [
+        {
+          "targets": 0,
+          "checkboxes": {
+            "selectRow": true
+          }
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        { "orderable": false },
+        { "orderable": false },
+        { "orderable": false }
+      ],
+       'select': {
+          'style': 'multi'
+       },
+       "ordering": true,
+       'order': [[2, 'asc']],
+       "language": {
+         "paginate": {
+           "next": "Siguiente",
+           "previous": "Anterior" },
+         "search": "Buscar en el listado",
+         "info": "Mostrando página _PAGE_ de _PAGES_",
+         "emptyTable": "No existen colegiados",
+         "lengthMenu": "Mostrando _MENU_ colegiados por página",
+         "infoEmpty": "No se muestran colegiados",
+         "infoFiltered": "(sobre un total de _MAX_ colegiados)",
+         "zeroRecords": "No existen colegiados que se ajusten a esta búsqueda"
+       }
+
+    });
+
+    $("#exportPDFButton").click(function(e) {
+      var rows_selected = table.column(0).checkboxes.selected();
+      var colegiados_ids = new Array;
+      $.each(rows_selected, function(index, rowId){
+        colegiados_ids.push(rowId);
+      });
+      $("#colegiados_ids").val(colegiados_ids);
+    });
+
+    $('#modalExportarPDF').on('shown.bs.modal', function (e) {
+      var ids = $("#colegiados_ids").val();
+      if (ids === '') {
+        $("#modalFiltros").removeClass('hidden');
+        $("#modalSeleccionados").addClass('hidden');
+      } else {
+        $("#modalSeleccionados").removeClass('hidden');
+        $("#modalFiltros").addClass('hidden');
+      }
+    });
+
+  });
+</script>

@@ -1,4 +1,4 @@
-<%= render template: 'pdfs/cabecera', locals: { colegio: Colegio.first } %>
+<%= render template: 'pdfs/cabecera', locals: { colegio: colegio } %>
 <%= render template: 'pdfs/direccion_colegiado', locals: { colegiado: colegiados } %>
 <br>
 <% if documento.codigo == 'recibo' %>

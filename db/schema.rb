@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526133416) do
+ActiveRecord::Schema.define(version: 20170601180309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170526133416) do
     t.integer "colegiado_id"
     t.date    "alta"
     t.date    "baja"
+    t.integer "causa_baja_id"
   end
 
   create_table "cargos", force: :cascade do |t|
@@ -82,7 +83,6 @@ ActiveRecord::Schema.define(version: 20170526133416) do
     t.integer  "titulacion_id"
     t.string   "numero_archivo"
     t.boolean  "excluido_censo",          default: false
-    t.integer  "causa_baja_id"
     t.index ["apellidos"], name: "index_colegiados_on_apellidos", using: :btree
     t.index ["nif"], name: "index_colegiados_on_nif", using: :btree
     t.index ["numero"], name: "index_colegiados_on_numero", using: :btree
@@ -133,6 +133,17 @@ ActiveRecord::Schema.define(version: 20170526133416) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "documento_id"
+    t.string   "codigo_recibo"
+    t.string   "concepto"
+    t.float    "importe"
+  end
+
+  create_table "documento_colegios", force: :cascade do |t|
+    t.integer  "colegio_id"
+    t.integer  "documento_id"
+    t.string   "nombre_documento"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "documentos", force: :cascade do |t|
@@ -168,15 +179,6 @@ ActiveRecord::Schema.define(version: 20170526133416) do
   create_table "provincias", force: :cascade do |t|
     t.string "codigo"
     t.string "nombre"
-  end
-
-  create_table "recibo_colegiados", force: :cascade do |t|
-    t.integer  "colegiado_id"
-    t.string   "codigo_factura"
-    t.string   "concepto"
-    t.float    "importe"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
   end
 
   create_table "recompensa_colegiados", force: :cascade do |t|

@@ -5,9 +5,25 @@
   </h1>
 </section>
 <section class="content">
-  <div class="box box-primary">
+  <div class="box box-primary" id="canvas_documento">
     <div class="box-body">
-      <%= render 'colegios/form_colegio' %>
+      <% if @documento && @documento_html %>
+        <div class="box" id="box_documento">
+          <div class="box-body">
+            <%= render template: 'colegios/form_edit_pdf', locals: { documento: @documento, contenido_documento: @documento_html, colegio: @colegio } %>
+          </div>
+        </div>
+      <% else %>
+        <%= render 'colegios/form_colegio' %>
+      <% end %>
     </div>
   </div>
+  <% if @documento && @documento_html %>
+    <div class="box box-primary">
+      <div class="box-body canvas_listado_documentos">
+        <%= render 'colegios/listado_documentos' %>
+      </div>
+    </div>
+  <% end %>
+
 </section>

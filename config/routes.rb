@@ -17,8 +17,11 @@ Rails.application.routes.draw do
     end
   end
   resources :colegios, except: %i[show index new create destroy] do
+    post 'presentar-documento', to: 'colegios#presentar_documento'
     collection do
-      post 'documento-pdf', to: 'colegios#generar_documento'
+      post 'listado-documentos'
+      post 'documento-pdf', to: 'downloads#generar_documento'
+      get  'mostrar-documento', to: 'colegios#mostrar_documento'
     end
   end
   resources :bancos, except: [:show]

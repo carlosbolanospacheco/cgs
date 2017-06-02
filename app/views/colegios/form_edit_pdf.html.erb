@@ -1,0 +1,29 @@
+<div class="box-header">
+  <h3 class="modal-title">Editar documento</h3>
+  <small>Edite el texto del documento a generar para el Colegio</small>
+</div>
+<%= form_tag documento_pdf_colegios_path(format: 'pdf', documento_id: documento, colegio_id: colegio) do %>
+  <div class="box-body pad">
+    <%= text_area_tag 'cuerpoDocumento', contenido_documento, style:"width: 100%; height: 300px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" %>
+  </div>
+  <div class="box-footer">
+    <%= button_tag 'Generar', id: 'generarButton', formtarget: '_blank', class: "btn btn-success" %>
+    <button type="button" class="btn btn-danger cancelEditButton">Cancelar</button>
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+  $("#cuerpoDocumento").wysihtml5();
+  $(".cancelEditButton").click(function(){
+    $("#canvas_documento").empty();
+    $("#canvas_documento").addClass('hidden');
+  });
+  /*
+  $("#generarButton").click(function() {
+    alert("Entra");
+    $.post( "<%= listado_documentos_colegios_path %>", function( data ) {
+    });
+  });
+  */
+});
+</script>

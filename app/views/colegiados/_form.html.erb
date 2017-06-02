@@ -20,24 +20,28 @@
     </div>
 
     <div class="box collapsed-box">
+      <%= render 'colegiados/nuevo_documento_colegiado', colegiado: @colegiado %>
+    </div>
+
+    <% if @colegiado.documento_colegiados.solo_recibos.length > 0 %>
+      <div class="box collapsed-box">
+        <%= render 'colegiados/recibos_colegiado', f: f %>
+      </div>
+    <% end %>
+
+    <% if @colegiado.documento_colegiados.sin_recibos.length > 0 %>
+      <div class="box collapsed-box">
+        <%= render 'colegiados/documentos_colegiado', f: f %>
+      </div>
+    <% end %>
+
+    <div class="box collapsed-box">
       <%= render 'colegiados/recompensas_colegiado', f: f %>
     </div>
 
     <div class="box collapsed-box">
       <%= render 'colegiados/movimientos_colegiado', f: f %>
     </div>
-
-    <% if @colegiado.documento_colegiados.solo_recibos.length > 0 %>
-      <div class="box collapsed-box">
-        <%= render 'colegiados/recibos_colegiado.html.erb', f: f %>
-      </div>
-    <% end %>
-
-    <% if @colegiado.documento_colegiados.sin_recibos.length > 0 %>
-      <div class="box collapsed-box">
-        <%= render 'colegiados/documentos_colegiado.html.erb', f: f %>
-      </div>
-    <% end %>
 
     <% if @colegiado.cargo_colegiados.length > 0 %>
       <div class="box collapsed-box">

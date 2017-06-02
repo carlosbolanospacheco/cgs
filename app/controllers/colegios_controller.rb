@@ -13,6 +13,16 @@ class ColegiosController < ApplicationController
     end
   end
 
+  def presentar_documento
+    @documento = Documento.find(params['documento_id'])
+    @documento_html = ApplicationController.render(template: cuerpo_documento,
+                                                   layout: false,
+                                                   assigns: { colegio: @colegio,
+                                                              documento: @documento })
+  end
+
+  def listado_documentos; end
+
   private
 
   def colegio_params
@@ -24,4 +34,9 @@ class ColegiosController < ApplicationController
   def set_colegio
     @colegio = Colegio.find(params['id'])
   end
+
+  def cuerpo_documento
+    "pdfs/cuerpo_#{@documento.codigo}"
+  end
+
 end

@@ -145,12 +145,6 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 <%= 'hidden' if !@colegiado.baja_colegio %>" id='selCausaBaja'>
-    <div class="form-group">
-      <%= f.label :causa_baja_id, 'Causa de baja' %>
-      <%= f.select :causa_baja_id, options_for_select(CausaBaja.all.collect{|u| ["#{u.nombre}", u.id]}, @colegiado.causa_baja_id), {}, {class: "form-control"} %>
-    </div>
-  </div>
 </div>
 <div class="row">
   <div class="col-md-3">
@@ -234,13 +228,3 @@
     </div>
   </div>
 </div>
-<script>
-$(document).on("change","#datepicker_baja",function(e){
-  if (this.value.length > 0) {
-  //if ($("#configurar_persona_checkbox").is(":checked")) {
-    $("#selCausaBaja").removeClass('hidden');
-  } else {
-    $("#selCausaBaja").addClass('hidden');
-  }
-});
-</script>

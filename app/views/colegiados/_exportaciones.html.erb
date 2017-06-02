@@ -9,7 +9,7 @@
   <%= link_to colegiados_path(format: 'xls'), class: 'btn btn-app' do %>
     <i class="fa fa-file-excel-o"></i>Excel
   <% end %>
-  <%= link_to '', class: 'btn btn-app', 'data-toggle': 'modal', 'data-target': '#modalExportarPDF' do %>
+  <%= link_to '', class: 'btn btn-app', id: 'exportPDFButton', 'data-toggle': 'modal', 'data-target': '#modalExportarPDF' do %>
     <i class="fa fa-file-pdf-o"></i>PDF
   <% end %>
 </div>

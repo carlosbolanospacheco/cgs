@@ -1,9 +1,11 @@
 <div class="nested-fields">
+<!--
   <div class="row">
     <div class="box-tools pull-right">
       <%= link_to_remove_association '', f, class: "fa fa-trash btn btn-box-tool", data: { confirm: "¿Eliminar cargo?" } %>
     </div>
   </div>
+-->
   <div class="row">
     <div class="col-md-3">
       <div class="form-group field">
@@ -35,6 +37,17 @@
             <i class="fa fa-calendar-times-o"></i>
           </div>
           <%= f.text_field :baja, value: f.object.baja ? f.object.baja.strftime('%d-%m-%Y') : 'Cargo actual', class: "form-control", disabled: '' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group field">
+        <%= f.label :causa_baja_id, 'Causa de baja' %>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-thumbs-down"></i>
+          </div>
+          <%= f.text_field :causa_baja_id, value: f.object.causa_baja_id ? f.object.causa_baja.nombre : '', class: "form-control", disabled: '' %>
         </div>
       </div>
     </div>

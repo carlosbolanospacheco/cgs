@@ -1,11 +1,12 @@
-<table id="listado-colegiados" class="table table-bordered table-striped" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+<table id="listado-colegiados" class="display table table-bordered table-striped" cellspacing="0" width="100%">
   <thead>
     <tr>
+      <th></th>
       <th>Número</th>
       <th>Nombre</th>
       <th>Email</th>
       <th>NIF</th>
-      <th>Móvil</th>
+      <th>Teléfono Móvil</th>
       <th>Régimen</th>
       <th>Estado</th>
       <th></th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @colegiados.each do |colegiado| %>
       <tr>
+        <td><%= colegiado.id.to_s %></td>
         <td><%= colegiado.numero %></td>
         <td><%= colegiado.nombre_completo %></td>
         <td><%= colegiado.email %></td>
@@ -34,10 +36,12 @@
           <div class="dropdown">
             <%= link_to '', '#', class: "dropdown-toggle fa fa-ellipsis-h", type:"button", id:"acciones_#{colegiado.id}", "data-toggle":"dropdown", "aria-haspopup":"true", 'aria-expanded':'true' %>
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="acciones_<%= colegiado.id %>">
-              <li>
-                <%= link_to 'Crear un Recibo', colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'recibo')), remote: true, method: :post %>
-              </li>
-              <li role="separator" class="divider"></li>
+              <% if colegiado.regimen_colegiado.literal != 'Precolegiado' && colegiado.regimen_colegiado.literal != 'Emérito' %>
+                <li>
+                  <%= link_to 'Crear un Recibo', colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'recibo')), remote: true, method: :post %>
+                </li>
+                <li role="separator" class="divider"></li>
+              <% end %>
               <li>
                 <%= link_to 'Certificado de Colegiación', colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'certificado_colegiacion')), remote: true, method: :post %>
               </li>
@@ -50,11 +54,12 @@
               <li>
                 <%= link_to 'Cambio de Régimen', colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'cambio_regimen')), remote: true, method: :post %>
               </li>
-              <li role="separator" class="divider"></li>
-              <li>
-                <%= link_to 'Domicialiación Bancaria', colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'domiciliacion_bancaria')), remote: true, method: :post %>
-              </li>
-              <li role="separator" class="divider"></li>
+              <% if colegiado.regimen_colegiado.literal != 'Precolegiado' && colegiado.regimen_colegiado.literal != 'Emérito' %>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <%= link_to 'Domiciliación Bancaria', colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'domiciliacion_bancaria')), remote: true, method: :post %>
+                </li>
+              <% end %>
             </ul>
           </div>
         </td>
@@ -62,36 +67,3 @@
     <% end %>
   </tbody>
 </table>
-<script>
-$(document).ready(function () {
-    $("#listado-colegiados").DataTable( {
-       "lengthMenu": [ [20, 35, 50, -1], [20, 35, 50, "Todos"] ],
-       "ordering": true,
-       "columns": [
-         null,
-         null,
-         null,
-         null,
-         null,
-         null,
-         null,
-         { "orderable": false },
-         { "orderable": false },
-         { "orderable": false }
-       ],
-       "language": {
-         "paginate": {
-           "next": "Siguiente",
-           "previous": "Anterior" },
-         "search": "Buscar en el listado",
-         "info": "Mostrando página _PAGE_ de _PAGES_",
-         "emptyTable": "No existen colegiados",
-         "lengthMenu": "Mostrando _MENU_ colegiados por página",
-         "infoEmpty": "No se muestran colegiados",
-         "infoFiltered": "(sobre un total de _MAX_ colegiados)",
-         "zeroRecords": "No existen colegiados que se ajusten a esta búsqueda"
-       }
-      }
-    );
-  });
-</script>

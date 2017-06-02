@@ -1,0 +1,45 @@
+<table id="listado-documentos" class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @colegio.documento_colegios.each do |documento| %>
+      <tr>
+        <td><%= link_to documento.nombre_documento, mostrar_documento_colegios_path(documento_id: documento), target: :_blank, format: :pdf %></td>
+        <td><%= documento.documento.nombre %></td>
+        <td><%= documento.created_at.strftime('%d-%m-%Y') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+$(document).ready(function () {
+    var table = $("#listado-documentos").DataTable({
+      "lengthMenu": [ [20, 35, 50, -1], [20, 35, 50, "Todos"] ],
+      "columns": [
+        null,
+        null,
+        null,
+      ],
+       "ordering": true,
+       'order': [[2, 'desc']],
+       "language": {
+         "paginate": {
+           "next": "Siguiente",
+           "previous": "Anterior" },
+         "search": "Buscar en el listado",
+         "info": "Mostrando página _PAGE_ de _PAGES_",
+         "emptyTable": "No existen documentos",
+         "lengthMenu": "Mostrando _MENU_ documentos por página",
+         "infoEmpty": "No se muestran documentos",
+         "infoFiltered": "(sobre un total de _MAX_ documentos)",
+         "zeroRecords": "No existen documentos que se ajusten a esta búsqueda"
+       }
+
+    });
+});
+</script>

@@ -1,0 +1,5 @@
+<%= render template: 'pdfs/cabecera', locals: { colegio: colegio } %>
+<br>
+<%== parametros['cuerpoDocumento'] %>
+<br><br>
+<%= render template: 'pdfs/firma', locals: { documento: documento, host: host, port: port } %>

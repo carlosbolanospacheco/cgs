@@ -3,8 +3,7 @@ class ColegiadosController < ApplicationController
   load_and_authorize_resource
   before_action :set_colegiado, only: %i[edit update destroy]
 
-  def show
-  end
+  def show; end
 
   def index
     @colegiados = Colegiado.all
@@ -63,20 +62,9 @@ class ColegiadosController < ApplicationController
     @colegiados = Colegiado.all
   end
 
-  def mostrar_documento
-    documento = DocumentoColegiado.find(params['documento_id'])
-    send_file documento.obtener_ruta,
-              filename: documento.nombre_documento,
-              type: 'application/pdf',
-              disposition: 'inline'
-
-  end
-
   def presentar_documento
-    @colegio = Colegio.first
     @colegiado = Colegiado.find(params['colegiado_id'])
     @documento = Documento.find(params['documento_id'])
-    logger.debug("Documento #{@documento.codigo}")
     if @documento.codigo != 'recibo'
       @documento_html = ApplicationController.render(template: cuerpo_documento,
                                                      layout: false,
@@ -93,7 +81,7 @@ class ColegiadosController < ApplicationController
             :email, :telefono_fijo, :telefono_movil, :fax, :cuenta_bancaria,
             :alta_colegio, :baja_colegio, :regimen_colegiado_id, :direccion_colegiado_id,
             :jura, :epp, :nombre_empresa, :nif_empresa, :observaciones, :excluido_censo,
-            :titulacion_id, :numero_archivo, :causa_baja_id,
+            :titulacion_id, :numero_archivo,
             direccion_colegiados_attributes: %i[id descripcion direccion codigo_postal
                                                 provincia_id poblacion principal _destroy],
             cargo_colegiados_attributes: %i[id _destroy colegiado_id cargo_id],

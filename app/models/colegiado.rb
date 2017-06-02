@@ -7,7 +7,6 @@ class Colegiado < ApplicationRecord
   # Relaciones
   belongs_to :regimen_colegiado
   belongs_to :titulacion, optional: true
-  belongs_to :causa_baja, optional: true
   has_many :direccion_colegiados, inverse_of: :colegiado, dependent: :destroy
   has_many :cargo_colegiados, inverse_of: :colegiado, dependent: :destroy
   has_many :movimiento_colegiados, inverse_of: :colegiado, dependent: :destroy
@@ -57,9 +56,10 @@ class Colegiado < ApplicationRecord
   scope :de_baja, (-> { where.not baja_colegio: ['', nil] })
   scope :regimen, (->(regimen) { where regimen_colegiado_id: regimen })
   scope :antiguedad, (->(antiguedad) { where('baja_colegio is NULL AND alta_colegio <= ?', antiguedad.to_i.years) })
+  # Incluir estados
   scope :censo_electoral, (-> { where('baja_colegio is NULL AND alta_colegio <= ?', 1.month.ago) })
   scope :elegibles,
-        (-> { where('baja_colegio is NULL AND alta_colegio < ?', Date.today - Colegio.first.antiguedad_elegible.years) })
+        (-> { where('baja_colegio is NULL AND alta_colegio < ?', Date.today - @colegio.antiguedad_elegible.years) })
 
   def nombre_completo
     [apellidos, nombre].compact.join(', ')

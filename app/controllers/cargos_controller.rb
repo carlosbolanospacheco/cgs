@@ -25,8 +25,9 @@ class CargosController < ApplicationController
 
   def update
     @cargo.colegiado_id_will_change! if @cargo.colegiado_id_changed? && @cargo.colegiado
+    causa_baja = cargo_params[:causa_baja_id]
     if @cargo.update(cargo_params)
-      set_cambio_colegiado if @cargo.colegiado_id_previously_changed?
+      cambio_colegiado(causa_baja) if @cargo.colegiado_id_previously_changed?
       @cargos = Cargo.all
       flash.now[:success] = "El cargo #{@cargo.nombre} se ha actualizado correctamente"
     else
@@ -47,7 +48,7 @@ class CargosController < ApplicationController
   private
 
   def cargo_params
-    keys = %i[nombre codigo colegiado_id firma] # nif nombre_completo tratamiento firma]
+    keys = %i[nombre codigo colegiado_id firma causa_baja_id] # nif nombre_completo tratamiento firma]
     params.require(:cargo).permit(keys)
   end
 
@@ -55,29 +56,29 @@ class CargosController < ApplicationController
     @cargo = Cargo.find(params['id'])
   end
 
-  def set_cambio_colegiado
-    set_cargo_saliente if @cargo.colegiado_id_previous_change[0]
+  def cambio_colegiado(causa_baja)
+    cargo_saliente(causa_baja) if @cargo.colegiado_id_previous_change[0]
     return unless @cargo.colegiado
     CargoColegiado.create(colegiado: @cargo.colegiado,
                           cargo: @cargo,
                           alta: DateTime.now.to_date)
   end
 
-  def set_cargo_saliente
+  def cargo_saliente(causa_baja)
     antiguo_colegiado = Colegiado.find(@cargo.colegiado_id_previous_change[0])
     antiguo_cargo = CargoColegiado.find_by(colegiado: antiguo_colegiado,
                                            cargo: @cargo,
                                            baja: nil)
     if antiguo_cargo
-      logger.debug("Indicando el fin del cargo #{@cargo.nombre} para #{antiguo_colegiado.nombre_completo}")
       antiguo_cargo.baja = DateTime.now.to_date
+      antiguo_cargo.causa_baja_id = causa_baja
       antiguo_cargo.save
     else
-      logger.debug("Creando entrada del cargo #{@cargo.nombre} para el colegiado #{antiguo_colegiado.nombre_completo}")
       CargoColegiado.create(colegiado: antiguo_colegiado,
                             cargo: @cargo,
                             alta: DateTime.now.to_date,
-                            baja: DateTime.now.to_date)
+                            baja: DateTime.now.to_date,
+                            causa_baja_id: causa_baja)
     end
   end
 end

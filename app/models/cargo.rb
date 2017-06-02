@@ -17,6 +17,8 @@ class Cargo < ApplicationRecord
                        content_type: { content_type: ['image/jpeg', 'image/gif', 'image/png'] },
                        size: { in: 0..1024.kilobytes }
   default_scope { order(nombre: :asc) }
+  # Atributo usado para indicar la causa de baja de un colegiado en un cargo
+  attr_accessor :causa_baja_id
 
   private
 

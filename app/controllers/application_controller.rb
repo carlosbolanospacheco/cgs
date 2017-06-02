@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     I18n.locale = I18n.default_locale # params[:locale] || I18n.default_locale
+    @colegio = Colegio.first
   end
 
   def configure_permitted_parameters
@@ -26,5 +27,13 @@ class ApplicationController < ActionController::Base
                                                                 password_confirmation
                                                                 superadmin_role supervisor_role
                                                                 user_role remember_me username])
+  end
+
+  def mostrar_documento
+    documento = DocumentoColegiado.find(params['documento_id'])
+    send_file documento.obtener_ruta,
+              filename: documento.nombre_documento,
+              type: 'application/pdf',
+              disposition: 'inline'
   end
 end

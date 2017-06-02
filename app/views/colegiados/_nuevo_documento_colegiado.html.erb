@@ -1,0 +1,44 @@
+<div class="box-header">
+  <i class="fa fa-download"></i>
+  <h3 class="box-title">Generar Nuevos Documentos</h3>
+  <div class="box-tools pull-right">
+    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+  </div>
+</div>
+<div class="box hidden" id="box_documento">
+  <div class="box-body" id="canvas_documento">
+  </div>
+</div>
+<div class="box-body">
+  <div class="row">
+    <div class="col-md-12">
+      <% if colegiado.regimen_colegiado.literal != 'Precolegiado' && colegiado.regimen_colegiado.literal != 'Emérito' %>
+        <%= link_to colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'recibo')), remote: true, method: :post, class: 'btn btn-app' do %>
+          <i class="fa fa-money"></i>Recibo
+        <% end %>
+      <% end %>
+
+      <%= link_to colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'certificado_colegiacion')), remote: true, method: :post, class: 'btn btn-app' do %>
+        <i class="fa fa-certificate"></i>Certificado de Colegiación
+      <% end %>
+
+      <%= link_to colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'certificado_cuotas')), remote: true, method: :post, class: 'btn btn-app' do %>
+        <i class="fa fa-certificate"></i>Certificado de Cuotas
+      <% end %>
+
+      <%= link_to colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'cambio_estado')), remote: true, method: :post, class: 'btn btn-app' do %>
+        <i class="fa fa-exchange"></i>Cambio de Estado
+      <% end %>
+
+      <%= link_to colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'cambio_regimen')), remote: true, method: :post, class: 'btn btn-app' do %>
+        <i class="fa fa-exchange"></i>Cambio de Régimen
+      <% end %>
+
+      <% if colegiado.regimen_colegiado.literal != 'Precolegiado' && colegiado.regimen_colegiado.literal != 'Emérito' %>
+        <%= link_to colegiado_presentar_documento_path(colegiado, documento_id: Documento.find_by(codigo: 'domiciliacion_bancaria')), remote: true, method: :post, class: 'btn btn-app' do %>
+          <i class="fa fa-bank"></i>Domiciliación Bancaria
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

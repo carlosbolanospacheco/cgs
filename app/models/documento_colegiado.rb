@@ -1,5 +1,4 @@
 # Documentos generados para los colegiados.
-# Esta tabla no incluye los documentos generales del colegio
 class DocumentoColegiado < ApplicationRecord
   belongs_to :colegiado, inverse_of: :documento_colegiados
   belongs_to :documento

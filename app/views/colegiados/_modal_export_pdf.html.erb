@@ -8,50 +8,62 @@
       </div>
       <%= form_tag listado_pdf_colegiados_path(format: 'pdf') do %>
         <div class="modal-body">
-          <p>
-            Seleccione los filtros que se usarán para generar el PDF de Colegiados.
-          </p>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <%= label_tag "Estado" %>
-                <%= select_tag "estado", options_for_select([['Activos', 'alta'], ['Inactivos', 'baja']], 'todos'), {class: "form-control", prompt: 'Selecciona una opción'} %>
+          <%= hidden_field_tag 'colegiados_ids' %>
+          <div id="modalFiltros">
+            <div class="row">
+              <div class="col-md-12">
+                Seleccione los filtros que se usarán para generar el PDF de Colegiados.
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <%= label_tag "Estado" %>
+                  <%= select_tag "estado", options_for_select([['Activos', 'alta'], ['Inactivos', 'baja']], 'todos'), {class: "form-control", prompt: 'Selecciona una opción'} %>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <%= label_tag "Régimen" %>
+                  <%= select_tag "regimen", options_for_select(RegimenColegiado.all.collect{|u| ["#{u.literal}", u.id]}), {class: "form-control", prompt: 'Selecciona una opción'} %>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <%= label_tag "Antigüedad (años)" %>
+                  <%= number_field_tag "antiguedad", 0, min: 0, max: 50, step: 1, class: "form-control" %>
+                </div>
               </div>
             </div>
-            <div class="col-md-5">
-              <div class="form-group">
-                <%= label_tag "Régimen" %>
-                <%= select_tag "regimen", options_for_select(RegimenColegiado.all.collect{|u| ["#{u.literal}", u.id]}), {class: "form-control", prompt: 'Selecciona una opción'} %>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="icheck">
+                    <%= check_box_tag "censo_electoral" %>
+                    <%= label_tag "Censo electoral" %>&nbsp;&nbsp;
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="icheck">
+                    <%= check_box_tag "elegibles" %>
+                    <%= label_tag "Sólo elegibles" %>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <%= label_tag "Antigüedad (años)" %>
-                <%= number_field_tag "antiguedad", 0, min: 0, max: 50, step: 1, class: "form-control" %>
+          </div>
+          <div id="modalSeleccionados">
+            <div class="row">
+              <div class="col-md-12">
+                Se va a generar el documento PDF con la información de los colegiados seleccionados.
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="icheck">
-                  <%= check_box_tag "censo_electoral" %>
-                  <%= label_tag "Censo electoral" %>&nbsp;&nbsp;
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="icheck">
-                  <%= check_box_tag "elegibles" %>
-                  <%= label_tag "Sólo elegibles" %>
-                </div>
-              </div>
+            <div class="col-md-12">
+              Seleccione los campos cuya información desea exportar al documento (el número y el nombre del colegiado siemmpren se exportan).
             </div>
           </div>
-          <p>
-            Seleccione los campos cuya información desea exportar al documento (el número y el nombre del colegiado siemmpren se exportan).
-          </p>
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">

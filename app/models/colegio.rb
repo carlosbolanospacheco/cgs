@@ -1,5 +1,6 @@
 class Colegio < ApplicationRecord
   belongs_to :provincia
+  has_many :documento_colegios, inverse_of: :colegio, dependent: :destroy
   # Imagenes
   has_attached_file :logo_colegio,
                     styles: { thumb: '150x150>' },

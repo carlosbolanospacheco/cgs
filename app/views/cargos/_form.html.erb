@@ -48,6 +48,12 @@
           <%= f.select :colegiado_id, options_for_select(Colegiado.activos.collect{|u| ["#{u.nombre_completo}", u.id]}.insert(0, ''), @cargo.colegiado_id), {}, {class: "form-control"} %>
         </div>
       </div>
+      <div class="col-md-3 hidden" id='selCausaBaja'>
+        <div class="form-group">
+          <%= f.label :causa_baja_id, "Causa de baja de #{@cargo.colegiado ? @cargo.colegiado.nombre_texto : ''}" %>
+          <%= f.select :causa_baja_id, options_for_select(CausaBaja.all.collect{|u| ["#{u.nombre}", u.id]}), {}, {class: "form-control"} %>
+        </div>
+      </div>
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :firma, 'Firma' %><br>
@@ -63,19 +69,30 @@
   </div>
 <% end %>
 <script>
+
 $(document).ready(function(){
+  $(document).on("click","#configurar_persona",function(e){
+    if ($("#configurar_persona_checkbox").is(":checked")) {
+      $(".persona-en-cargo").removeClass('hidden');
+    } else {
+      $(".persona-en-cargo").addClass('hidden');
+    }
+  });
+
+  $(document).on("change","#cargo_colegiado_id",function(e){
+    if (<%= @cargo.colegiado_id ? @cargo.colegiado_id : 0 %> == 0) return;
+    alert("Anterior <%= @cargo.colegiado_id %> con el valor seleccionado " + this.value );
+    if (this.value > 0 && this.value != <%= @cargo.colegiado_id ? @cargo.colegiado_id : 0 %>) {
+      $("#selCausaBaja").removeClass('hidden');
+    } else if (this.value == <%= @cargo.colegiado_id ? @cargo.colegiado_id : 0 %>) {
+      $("#selCausaBaja").addClass('hidden');
+    }
+  });
+
   $(".cancelButton").click(function(){
     $(".canvas_cargo").empty();
     $(".box_cargo").addClass('hidden');
   });
-});
-
-$(document).on("click","#configurar_persona",function(e){
-  if ($("#configurar_persona_checkbox").is(":checked")) {
-    $(".persona-en-cargo").removeClass('hidden');
-  } else {
-    $(".persona-en-cargo").addClass('hidden');
-  }
 });
 
 </script>

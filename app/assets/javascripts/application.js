@@ -10,28 +10,26 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require turbolinks
-//= require bootstrap
-//= require jquery.slimscroll
-//= require jquery.dataTables
-//= require dataTables.bootstrap
-//= require fastclick
-//= require bootstrap-datepicker
-//= require bootstrap-datepicker.es
-//= require icheck
 //= require jquery.inputmask
 //= require jquery.inputmask.extensions
 //= require jquery.inputmask.date.extensions
 //= require jquery.inputmask.numeric.extensions
 //= require jquery.inputmask.regex.extensions
 //= require jquery.inputmask.phone.extensions
+//= require jquery.slimscroll
+//= require jquery.remotipart
+//= require turbolinks
+//= require bootstrap
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker.es
 //= require bootstrap3-wysihtml5.all
+//= require dataTables.bootstrap
+//= require fastclick
+//= require icheck
 //= require cocoon
 //= require toastr
-//= require jquery.remotipart
 //= require_tree .
 
 $(document).ready(function() {
