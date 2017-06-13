@@ -1,0 +1,3 @@
+<%= render template: 'pdfs/cabecera', locals: { colegio: colegio } %>
+<h2 class='centrado'>Orden de domiciliación de adeudo directo SEPA<br><small>SEPA Direct Debit Mandate</small></h2>
+<%= render template: 'pdfs/cuerpo_domiciliacion', locals: { parametros: parametros, colegio: colegio, colegiado: colegiados } %>

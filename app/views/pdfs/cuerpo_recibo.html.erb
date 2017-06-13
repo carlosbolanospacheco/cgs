@@ -2,17 +2,17 @@
 <br><br>
 <p>En Oviedo, a <%= l(DateTime.now.to_date, format:'%d de %B de %Y') %></p>
 <br><br>
-<table border="1" width="100%">
+<table class='cuadro'>
   <thead>
-    <tr>
-      <th width="75%">Concepto</th>
-      <th>Importe</th>
+    <tr class='cuadro'>
+      <th width="75%" class='izquierda'>Concepto</th>
+      <th class='derecha'>Importe</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><%= parametros['concepto'] %></td>
-      <td><%= parametros['importe'] %>€</td>
+      <td class='derecha'><%= parametros['importe'] %>€</td>
     </tr>
   </tbody>
 </table>

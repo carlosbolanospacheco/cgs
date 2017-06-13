@@ -1,5 +1,10 @@
-<h1>Bienvenido, <%= nombre %></h1>
+<h1>Bienvenido, <%= @user.nombre_completo %></h1>
 <p>
   Accede a la aplicación a través de la siguiente URL: <%= root_url %>.
 </p>
+<p> Tus credenciales de entrada son:</p>
+<ul>
+  <li>Usuario: <%= @user.username %> / <%= @user.email %></li>
+  <li>Contraseña <%= @user.password %></li>
+</ul>
 <p>Gracias por darte de alta!</p>

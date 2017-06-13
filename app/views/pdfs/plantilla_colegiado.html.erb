@@ -10,5 +10,5 @@
 <%= render template: 'pdfs/firma', locals: { documento: documento, host: host, port: port } %>
 <% if documento.codigo == 'recibo' %>
   <br><br><br>
-  <p><strong><font size="1">El presente recibo podrá hacerse efectivo bien en el Colegio o mediante transferencia a través del mismo. Carecerá de validez si no está firmado y sellado por el expedidor o vaya acompañado de un justificante de la transferencia</font></strong></p>
+  <p class='negrita fuente_anotacion'>El presente recibo podrá hacerse efectivo bien en el Colegio o mediante transferencia a través del mismo. Carecerá de validez si no está firmado y sellado por el expedidor o vaya acompañado de un justificante de la transferencia</p>
 <% end %>

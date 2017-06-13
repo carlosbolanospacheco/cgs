@@ -20,7 +20,7 @@
           <%= link_to 'Junta General Ordinaria', colegio_presentar_documento_path(@colegio, documento_id: Documento.find_by(codigo: 'junta_general')), remote: true, method: :post %>
         </li>
         <li>
-          <%= link_to 'Generar Modelo 13', documento_pdf_colegios_path(documento_id: Documento.find_by(codigo: 'modelo_13')), remote: true, method: :post %>
+          <%= link_to 'Modelo 13', colegio_modelo_13_path(@colegio), remote: true, method: :post %>
         </li>
         <li>
           <%= link_to "Etiquetas", etiquetas_colegiados_path(format: 'pdf'), target: '_blank' %>

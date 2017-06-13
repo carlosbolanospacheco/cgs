@@ -89,7 +89,9 @@ class DownloadsController < ApplicationController
   end
 
   def documento_params
-    keys = %i[cuerpoDocumento colegio_id colegiado_id documento_id codigo_recibo concepto importe]
+    keys = [:cuerpoDocumento, :colegio_id, :colegiado_id, :documento_id, :codigo_recibo, :concepto, :importe,
+            :mes, :anyo, :identificador_acreedor, :nombre_deudor, :direccion_deudor, :poblacion_deudor, :referencia_domiciliacion,
+            :codigo_postal_deudor, :provincia_deudor, :bic_deudor, :iban_deudor, :recurrente, valores:[]]
     params.permit(keys)
   end
 

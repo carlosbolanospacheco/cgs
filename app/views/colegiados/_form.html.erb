@@ -1,10 +1,14 @@
 <%= form_for @colegiado, remote:true, html: {autocomplete: 'off', multipart: true} do |f| %>
-  <div class="box box-primary collapsed-box">
+  <div class="box box-primary <%= @colegiado.new_record? ? '' : 'collapsed-box' %>">
     <div class="box-header">
       <i class="fa fa-user"></i>
       <h3 class="box-title">Ficha de Colegiado</h3>
       <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+        <% if @colegiado.new_record? %>
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        <% else %>
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+        <% end %>
       </div>
     </div>
     <div class="box-body">

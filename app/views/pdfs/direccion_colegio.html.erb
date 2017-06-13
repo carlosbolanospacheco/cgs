@@ -1,0 +1,21 @@
+<table width="100%">
+  <tr>
+    <td>
+      <%= colegio.direccion %>&nbsp;<%= colegio.codigo_postal %>,&nbsp;<%= colegio.poblacion %>&nbsp;<%= colegio.provincia.nombre %>
+    </td>
+  </tr>
+  <tr>
+    <td>CIF: <strong><%= colegio.cif %></strong></td>
+  </tr>
+  <% if documento.firma_1_cargo %>
+    <tr>
+      <td >Persona de contacto: <strong><%= documento.firma_1_cargo.colegiado.nombre_completo %></strong></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td >Teléfono de contacto: <strong><%= colegio.telefono %></strong></td>
+  </tr>
+  <tr>
+    <td>Periodo de la liquidación: <strong><%= t('date.month_names')[mes.to_i] %> de <%= anyo %></strong></td>
+  </tr>
+</table>

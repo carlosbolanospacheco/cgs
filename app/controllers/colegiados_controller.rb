@@ -65,7 +65,7 @@ class ColegiadosController < ApplicationController
   def presentar_documento
     @colegiado = Colegiado.find(params['colegiado_id'])
     @documento = Documento.find(params['documento_id'])
-    if @documento.codigo != 'recibo'
+    if @documento.codigo != 'recibo' && @documento.codigo != 'domiciliacion_bancaria'
       @documento_html = ApplicationController.render(template: cuerpo_documento,
                                                      layout: false,
                                                      assigns: { colegio: @colegio,
@@ -74,11 +74,15 @@ class ColegiadosController < ApplicationController
     end
   end
 
+  def crear_mesa_electoral
+    @mesa_electoral = Colegiado.censo_electoral.random(6)
+  end
+
   private
 
   def colegiado_params
     keys = [:numero, :nombre, :apellidos, :nif, :nacimiento, :genero, :fotografia,
-            :email, :telefono_fijo, :telefono_movil, :fax, :cuenta_bancaria,
+            :email, :telefono_fijo, :telefono_movil, :fax, :cuenta_bancaria, :bic,
             :alta_colegio, :baja_colegio, :regimen_colegiado_id, :direccion_colegiado_id,
             :jura, :epp, :nombre_empresa, :nif_empresa, :observaciones, :excluido_censo,
             :titulacion_id, :numero_archivo,

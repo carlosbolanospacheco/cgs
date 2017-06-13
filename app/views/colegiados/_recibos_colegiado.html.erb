@@ -8,7 +8,11 @@
 <div class="box-body">
   <div class="row">
     <div class="col-md-12">
-      <p class="help-block">El colegiado tiene <strong><%= @colegiado.documento_colegiados.solo_recibos.length %></strong> recibos generados para un importe total de <strong><%= @colegiado.importe_recibos %>€</strong></p>
+      <% if @colegiado.documento_colegiados.solo_recibos &&  @colegiado.documento_colegiados.solo_recibos.length > 0 %>
+        <p class="help-block">El colegiado tiene <strong><%= @colegiado.documento_colegiados.solo_recibos.length %></strong> recibos generados para un importe total de <strong><%= @colegiado.importe_recibos %>€</strong></p>
+      <% else %>
+        <p class="help-block">El colegiado no tiene recibos generados</p>
+      <% end %>
     </div>
   </div>
   <div class="row">

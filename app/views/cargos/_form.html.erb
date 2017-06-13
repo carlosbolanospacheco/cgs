@@ -1,4 +1,5 @@
 <%= form_for @cargo, remote: true, html: { autocomplete: 'off', multipart: true } do |f| %>
+  <%= hidden_field_tag 'colegiado_actual', @cargo.colegiado_id ? @cargo.colegiado_id : 0 %>
   <div class="box-body">
     <%= render 'shared/errors', object: f.object %>
     <div class="row">
@@ -80,8 +81,7 @@ $(document).ready(function(){
   });
 
   $(document).on("change","#cargo_colegiado_id",function(e){
-    if (<%= @cargo.colegiado_id ? @cargo.colegiado_id : 0 %> == 0) return;
-    alert("Anterior <%= @cargo.colegiado_id %> con el valor seleccionado " + this.value );
+    if ($("#colegiado_actual").val() == 0) return;
     if (this.value > 0 && this.value != <%= @cargo.colegiado_id ? @cargo.colegiado_id : 0 %>) {
       $("#selCausaBaja").removeClass('hidden');
     } else if (this.value == <%= @cargo.colegiado_id ? @cargo.colegiado_id : 0 %>) {

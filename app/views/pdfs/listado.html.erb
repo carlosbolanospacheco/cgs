@@ -1,6 +1,6 @@
 <h3>Listado de Colegiados</h3>
-<table border="1" width="100%">
-  <thead>
+<table class='cuadro'>
+  <thead class='cuadro izquierda'>
     <tr>
       <th>Número</th>
       <th>Apellidos y Nombre</th>
@@ -66,9 +66,9 @@
       <% end %>
     </tr>
   </thead>
-  <tbody>
+  <tbody class='cuadro'>
     <% colegiados.each do |colegiado| %>
-      <tr>
+      <tr class='cuadro'>
         <td><%= colegiado.numero %></td>
         <td><%= colegiado.nombre_completo %></td>
         <% if parametros['nif'] %>

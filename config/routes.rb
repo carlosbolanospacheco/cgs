@@ -14,9 +14,11 @@ Rails.application.routes.draw do
       post 'recibo-pdf', to: 'downloads#generar_recibo'
       get  'etiquetas', to: 'downloads#etiquetas'
       get  'mostrar-documento', to: 'colegiados#mostrar_documento'
+      post 'crear-mesa-electoral'
     end
   end
   resources :colegios, except: %i[show index new create destroy] do
+    post 'modelo_13'
     post 'presentar-documento', to: 'colegios#presentar_documento'
     collection do
       post 'listado-documentos'

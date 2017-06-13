@@ -1,0 +1,22 @@
+<% if miembros %>
+  <table class="table table-striped">
+    <tr>
+      <th style="">Número</th>
+      <th>Nombre</th>
+      <th>NIF</th>
+      <th style="">Teléfono Móvil</th>
+      <th style="">Correo Electrónico</th>
+    </tr>
+    <% miembros.each do |miembro| %>
+      <tr>
+        <td><%= miembro.numero %></td>
+        <td><%= miembro.nombre_completo %></td>
+        <td><%= miembro.nif %></td>
+        <td><%= miembro.telefono_movil %></td>
+        <td><%= miembro.email %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>No existen colegiados disponibles para esta mesa</p>
+<% end %>

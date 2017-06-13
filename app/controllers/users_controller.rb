@@ -16,10 +16,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @bancos = Banco.all
-      flash.now[:success] = "La nueva entidad #{@user.nombre} se ha creado correctamente"
+      @users = User.all
+      flash.now[:success] = "El nuevo usuario #{@user.nombre_completo} se ha creado correctamente"
     else
-      flash.now[:error] = "No ha sido posible crear la entidad #{@user.nombre}"
+      flash.now[:error] = "No ha sido posible crear el usuario #{@user.nombre_completo}"
     end
   end
 

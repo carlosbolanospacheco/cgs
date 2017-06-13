@@ -1,0 +1,14 @@
+<div class="box-header">
+  <i class="fa fa-trophy"></i>
+  <h3 class="box-title">Mesa electoral</h3>
+  <div class="box-tools pull-right">
+    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+  </div>
+</div>
+<div class="box-body">
+  <%= link_to crear_mesa_electoral_colegiados_path(@colegio), remote: true, method: :post, class: 'btn btn-app' do %>
+    <i class="fa fa-legal"></i>Generar Mesa
+  <% end %>
+  <div id="miembros_mesa" class="hidden">
+  </div>
+</div>

@@ -2,6 +2,7 @@ require 'render_anywhere'
 
 class DocumentoPdf
   include RenderAnywhere
+  include Ficheros
 
   attr_reader :nombre
 
@@ -39,6 +40,7 @@ class DocumentoPdf
                      margin_left: margen_izquierda,
                      margin_bottom: margen_inferior,
                      footer_line: true)
+    self.crear_ruta("#{Rails.root}/public/system/documentos/#{@documento.codigo}")
     kit.to_file("#{Rails.root}/public/system/documentos/#{@documento.codigo}/#{@nombre}")
   end
 
@@ -54,6 +56,7 @@ class DocumentoPdf
                      footer_font_size: 10,
                      footer_center: pie_html)
     registrar_documento
+    self.crear_ruta("#{Rails.root}/public/system/documentos/#{@documento.codigo}")
     kit.to_file("#{Rails.root}/public/system/documentos/#{@documento.codigo}/#{@nombre}")
   end
 
@@ -95,12 +98,12 @@ class DocumentoPdf
   end
 
   def documento_colegiado_params
-    keys = %i[colegiado_id documento_id]
+    keys = %i[colegiado_id documento_id importe codigo_recibo concepto]
     @parametros.permit(keys)
   end
 
   def documento_colegio_params
-    keys = %i[colegio_id documento_id]
+    keys = %i[colegio_id documento_id mes anyo]
     @parametros.permit(keys)
   end
 

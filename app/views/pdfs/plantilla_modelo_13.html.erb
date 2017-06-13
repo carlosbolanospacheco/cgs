@@ -1,0 +1,7 @@
+<%= render template: 'pdfs/cabecera', locals: { colegio: colegio } %>
+<br>
+<%= render template: 'pdfs/direccion_colegio', locals: { colegio: colegio, documento: documento, mes: parametros['mes'], anyo: parametros['anyo'] } %>
+<br>
+<%= render template: 'pdfs/cuerpo_modelo_13', locals: { valores: parametros['valores'] } %>
+<br><br>
+<%= render template: 'pdfs/firma', locals: { documento: documento, host: host, port: port } %>

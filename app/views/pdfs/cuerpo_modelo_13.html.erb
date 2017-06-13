@@ -1,0 +1,70 @@
+<% total_colegiados = 0 %>
+<% total_base_imponible = 0.0 %>
+<% total_ingresar = 0.0 %>
+<table class='cuadro'>
+  <% valores.each do |valor| %>
+    <% elemento = eval(valor)[:value] %>
+    <% total_colegiados += elemento[:total_colegiados] %>
+    <tr class='cuadro'>
+      <td><%= elemento[:tipo] %></td>
+      <td><%= elemento[:total_colegiados] %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td><strong>NÚMERO TOTAL DE COLEGIADOS</strong></td>
+      <td><strong><%= total_colegiados %></strong></td>
+    </tr>
+</table>
+<br>
+<table class='cuadro'>
+  <thead>
+    <tr clas='centrado'>
+      <td width="25%">Modalidad</td>
+      <td width="15%" class='derecha'>Total Colegiados</td>
+      <td width="15%" class='derecha'>Base de Cálculo</td>
+      <td width="15%" class='derecha'>Base Imponible</td>
+      <td width="15%" class='derecha'>% Liquidar</td>
+      <td width="15%" class='derecha'>A Ingresar</td>
+    </tr>
+  </thead>
+  <tbody class='cuadro'>
+    <% valores.each do |valor| %>
+      <% elemento = eval(valor)[:value] %>
+      <% total_base_imponible += elemento[:base_imponible] %>
+      <% total_ingresar += elemento[:ingresar] %>
+      <tr class='cuadro'>
+        <td width="25%" class='izquierda'><%= elemento[:tipo] %></td>
+        <td width="15%" class='derecha'><%= elemento[:total_colegiados] %></td>
+        <td width="15%" class='derecha'><%= elemento[:base_calculo] %>€</td>
+        <td width="15%" class='derecha'><%= elemento[:base_imponible] %>€</td>
+        <td width="15%" class='derecha'><%= elemento[:liquidar] %>%</td>
+        <td width="15%" class='derecha'><%= elemento[:ingresar] %>€</td>
+      </tr>
+    <% end %>
+  </tbody>
+  <thead>
+    <tr class='derecha'>
+      <td width="25%"></td>
+      <td width="15%"><%= total_colegiados %></td>
+      <td width="15%"></td>
+      <td width="15%"><%= total_base_imponible %>€</td>
+      <td width="15%"></td>
+      <td width="15%"><%= total_ingresar %>€</td>
+    </tr>
+  </thead>
+</table>
+<br>
+<table class='cuadro'>
+  <tr class='cuadro'>
+    <td width="85%">A Ingresar</td>
+    <td width="15%" class='derecha'><%= total_ingresar %>€</td>
+  </tr>
+  <tr class='cuadro'>
+    <td width="85%">Recargo por Pago Fuera de Plazo</td>
+    <td width="15%" class='derecha'>0€</td>
+  </tr>
+  <tr class='negrita cuadro'>
+    <td width="85%">TOTAL A INGRESAR</td>
+    <td width="15%" class='derecha'><%= total_ingresar %>€</td>
+  </tr>
+</table>

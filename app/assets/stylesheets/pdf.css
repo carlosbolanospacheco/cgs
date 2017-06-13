@@ -19,6 +19,45 @@
 table, tr, td, th, tbody, thead, tfoot {
   page-break-inside: avoid !important;
 }
+
+table, th, td, tr {
+  border-collapse: collapse;
+}
+
+table {
+  width: 100%;
+}
+
+thead {
+  font-weight:bold;
+}
+
+body {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 20px;
+  font-weight:bold;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h3 {
+  text-align: center;
+  font-size: 18px;
+  font-weight:bold;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h3 {
+  text-align: center;
+  font-size: 16px;
+  font-weight:bold;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 .tr_etiqueta {
   height: 25.4mm;
   table-layout:fixed
@@ -27,5 +66,41 @@ table, tr, td, th, tbody, thead, tfoot {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 10px;
   width: 48.5mm;
+  text-align: center;
+}
+
+.borde_discontinuo{
+  border-style:dashed;
+}
+
+.fuente_anotacion {
+  font-size: 8px;
+}
+
+.fuente_minima {
+  font-size: 8px;
+}
+
+.azul {
+  color: blue;
+}
+
+.negrita {
+  font-weight:bold;
+}
+
+.cuadro {
+  border: 1px solid black;
+}
+
+.derecha {
+  text-align: right;
+}
+
+.izquierda {
+  text-align: left;
+}
+
+.centrado {
   text-align: center;
 }

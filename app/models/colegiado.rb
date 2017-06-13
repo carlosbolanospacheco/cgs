@@ -1,6 +1,7 @@
 # :nodoc:
 class Colegiado < ApplicationRecord
   include ActiveModel::Dirty
+  include Aleatorio
   define_attribute_methods
   include Filtrable
   include Validador
@@ -48,11 +49,15 @@ class Colegiado < ApplicationRecord
                               message: 'Formato de correo electrónico incorrecto' }
   validates :nif, uniqueness: { message: 'Este NIF ya existe para otro colegiado' }
   validate :check_nif
+  validates :bic, allow_blank: true, length: { minimum: 8, maximum: 11,
+                                               message: 'El código BIC %{value} no es válido,
+                                                         debe tener una longitud entre 8 y 11 caracteres' }
   # Callbacks
-  before_save :check_baja
   # Scope
   default_scope { order(apellidos: :asc) }
   scope :activos, (-> { where baja_colegio: ['', nil] })
+  scope :activos_en_fecha,
+        (->(mes, anyo) { where('alta_colegio <= ? and (baja_colegio is NULL or baja_colegio > ?)', DateTime.new(anyo, mes, 1), DateTime.new(anyo, mes, 1)) })
   scope :de_baja, (-> { where.not baja_colegio: ['', nil] })
   scope :regimen, (->(regimen) { where regimen_colegiado_id: regimen })
   scope :antiguedad, (->(antiguedad) { where('baja_colegio is NULL AND alta_colegio <= ?', antiguedad.to_i.years) })
@@ -75,7 +80,7 @@ class Colegiado < ApplicationRecord
   end
 
   def importe_recibos
-    documento_colegiados.solo_recibos.inject(0) { |sum, recibo| sum + recibo.importe }
+    "%.2f" % documento_colegiados.solo_recibos.inject(0) { |sum, recibo| sum + recibo.importe }
   end
 
   def cargo_actual
@@ -102,7 +107,4 @@ class Colegiado < ApplicationRecord
     validar_nif(nif)
   end
 
-  def check_baja
-    self.causa_baja_id = nil unless baja_colegio
-  end
 end

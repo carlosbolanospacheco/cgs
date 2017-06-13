@@ -1,1 +1,6 @@
-$(".content-wrapper").html("<%= escape_javascript(render 'colegios/principal', locals: { documento: @documento, documento_html: @documento_html, colegio: @colegio }) %>");
+<% if @documento.codigo == 'modelo_13' %>
+  $("#datos_modelo_13").removeClass('hidden');
+  $("#datos_modelo_13").html("<%=escape_javascript(render template: 'colegios/form_modelo_13_pdf', locals: { documento: @documento, colegio: @colegio, datos: @datos, mes: @mes, anyo: @anyo }) %>");
+<% else %>
+  $(".content-wrapper").html("<%= escape_javascript(render 'colegios/principal', locals: { documento: @documento, documento_html: @documento_html, colegio: @colegio }) %>");
+<% end %>

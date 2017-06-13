@@ -1,8 +1,19 @@
-<%= link_to root_path, class: 'logo text-nowrap text-center', remote: true do %>
-  <%= image_tag 'logos/logo_cgs.png', alt: 'Ir al listado de Colegiados', class: 'img-circle', size: '45x45' %>
-  <small style="word-wrap: break-word;word-break: break-all;">CGSA</small>
+<%= link_to root_path, class: 'logo', remote: true do %>
+  <!-- mini logo for sidebar mini 50x50 pixels -->
+  <span class="logo-mini">Colegio de Graduados Sociales de Asturias</span>
+  <!-- logo for regular state and mobile devices -->
+  <span class="logo-lg">
+    <%= image_tag 'logos/logo_cgs.png', alt: 'Ir al listado de Colegiados', size: '50x50' %>
+  </span>
 <% end %>
 <nav class="navbar navbar-static-top" role="navigation">
+  <!-- Sidebar toggle button-->
+  <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </a>
   <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">
       <% if user_signed_in? %>

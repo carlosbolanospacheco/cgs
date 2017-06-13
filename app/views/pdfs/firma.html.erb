@@ -1,5 +1,5 @@
-<table width="100%">
-  <tr style="text-align:center">
+<table>
+  <tr class='centrado'>
     <% if documento.firma_1_cargo %>
       <td width="50%"><strong><%= documento.firma_1_cargo.nombre.upcase %></strong></td>
     <% end %>
@@ -7,15 +7,15 @@
       <td width="50%"><strong><%= documento.firma_2_cargo.nombre.upcase %></strong></td>
     <% end %>
   </tr>
-  <tr style="text-align:center">
+  <tr class='centrado'>
     <% if documento.firma_1_cargo %>
-      <td width="50%"><%= image_tag "http://#{host}:#{port}#{documento.firma_1_cargo.firma.url}", class: 'img-rounded', size: '150x150' %></td>
+      <td width="50%"><%= image_tag "http://#{host}:#{port}#{documento.firma_1_cargo.firma.url}", class: 'img-rounded', size: '100x100' %></td>
     <% end %>
     <% if documento.firma_2_cargo %>
-      <td width="50%"><%= image_tag "http://#{host}:#{port}#{documento.firma_2_cargo.firma.url}", class: 'img-rounded', size: '150x150' %></td>
+      <td width="50%"><%= image_tag "http://#{host}:#{port}#{documento.firma_2_cargo.firma.url}", class: 'img-rounded', size: '100x100' %></td>
     <% end %>
   </tr>
-  <tr style="text-align:center">
+  <tr class='centrado'>
     <% if documento.firma_1_cargo %>
       <td width="50%"><strong><%= documento.firma_1_cargo.colegiado.nombre_completo %></strong></td>
     <% end %>

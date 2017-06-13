@@ -1,0 +1,2 @@
+$("#miembros_mesa").removeClass('hidden');
+$("#miembros_mesa").html("<%=escape_javascript(render 'colegiados/miembros_mesa_electoral', locals: { mesa_electoral: @mesa_electoral })%>");

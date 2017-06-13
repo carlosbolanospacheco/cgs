@@ -1,0 +1,89 @@
+<%= form_tag documento_pdf_colegiados_path(format: 'pdf', documento_id: documento, colegio_id: colegio) do %>
+  <div class="box-body box-primary">
+    <% @valores_modelo_13.each do |valor| %>
+      <%= hidden_field_tag 'valores[]', value: valor %>
+    <% end %>
+    <%= hidden_field_tag 'mes', @mes %>
+    <%= hidden_field_tag 'anyo', @anyo %>
+    <div class="row">
+      <div class="col-md-10">
+        <div class="form-group">
+          <%= label_tag "Datos del mes de #{t('date.month_names')[@mes]} del año #{@anyo}" %>
+        </div>
+      </div>
+    </div>
+    <% @valores_modelo_13.each do |linea| %>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+            <%= label_tag 'Tipo' %>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-info-circle"></i>
+              </div>
+              <%= text_field_tag "tipo_#{linea[:tipo]}", linea[:tipo], class: "form-control", disabled: ''  %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <div class="form-group">
+            <%= label_tag 'Colegiados' %>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-users"></i>
+              </div>
+              <%= text_field_tag "total_#{linea[:tipo]}", linea[:total_colegiados], class: "form-control", disabled: '' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <%= label_tag 'Base Cálculo' %>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-child"></i>
+              </div>
+              <%= text_field_tag "base_#{linea[:tipo]}", linea[:base_calculo], class: "form-control", disabled: '' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <%= label_tag 'Base Imponible' %>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-area-chart"></i>
+              </div>
+              <%= text_field_tag "base_#{linea[:tipo]}", linea[:base_imponible], class: "form-control", disabled: '' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <%= label_tag '% a Liquidar' %>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-sliders"></i>
+              </div>
+              <%= text_field_tag "liquidar_#{linea[:tipo]}", linea[:liquidar], class: "form-control", disabled: '' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <%= label_tag 'Cantidad Ingresar' %>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-institution"></i>
+              </div>
+              <%= text_field_tag "ingresar_#{linea[:tipo]}", linea[:ingresar], class: "form-control", disabled: '' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="box-footer">
+    <%= button_tag 'Generar', id: 'generarButton', formtarget: '_blank', class: "btn btn-success" %>
+  </div>
+<% end %>

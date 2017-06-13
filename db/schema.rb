@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601180309) do
+ActiveRecord::Schema.define(version: 20170608134559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20170601180309) do
     t.integer  "titulacion_id"
     t.string   "numero_archivo"
     t.boolean  "excluido_censo",          default: false
+    t.string   "bic"
     t.index ["apellidos"], name: "index_colegiados_on_apellidos", using: :btree
     t.index ["nif"], name: "index_colegiados_on_nif", using: :btree
     t.index ["numero"], name: "index_colegiados_on_numero", using: :btree
@@ -144,6 +145,8 @@ ActiveRecord::Schema.define(version: 20170601180309) do
     t.string   "nombre_documento"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "mes"
+    t.integer  "anyo"
   end
 
   create_table "documentos", force: :cascade do |t|
@@ -195,6 +198,7 @@ ActiveRecord::Schema.define(version: 20170601180309) do
     t.float   "importe_consejo"
     t.float   "porcentaje_a_pagar"
     t.integer "period_id"
+    t.boolean "activo",             default: true
   end
 
   create_table "tipo_movimientos", force: :cascade do |t|

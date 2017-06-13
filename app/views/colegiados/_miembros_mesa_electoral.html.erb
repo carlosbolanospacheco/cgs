@@ -1,0 +1,25 @@
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#titulares" data-toggle="tab">Miembros Titulares</a></li>
+    <li><a href="#suplentes" data-toggle="tab">Miembros Suplentes</a></li>
+  </ul>
+  <div class="tab-content">
+    <% titulares = @mesa_electoral[0..2] %>
+    <% suplentes = @mesa_electoral[3..5] %>
+    <div class="tab-pane active" id="titulares">
+      <%= render partial: 'colegiados/tabla_miembros_mesa', locals: { miembros: titulares } %>
+    </div>
+    <div class="tab-pane" id="suplentes">
+      <%= render partial: 'colegiados/tabla_miembros_mesa', locals: { miembros: suplentes } %>
+    </div>
+  </div>
+</div>
+<div id="limpiar">
+<button type="button" id="limpiar_mesa" class="btn bg-purple">Limpiar Resultados</button>
+</div>
+<script>
+$("#limpiar_mesa").click(function(){
+  $("#miembros_mesa").empty();
+  $("#miembros_mesa").addClass('hidden');
+});
+</script>

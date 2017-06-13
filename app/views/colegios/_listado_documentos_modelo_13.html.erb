@@ -2,16 +2,18 @@
   <thead>
     <tr>
       <th>Nombre</th>
-      <th>Tipo</th>
-      <th>Fecha</th>
+      <th>Fecha de Creación</th>
+      <th>Mes</th>
+      <th>Año</th>
     </tr>
   </thead>
   <tbody>
-    <% @colegio.documento_colegios.sin_modelo_13.each do |documento| %>
+    <% @colegio.documento_colegios.solo_modelo_13.each do |documento| %>
       <tr>
         <td><%= link_to documento.nombre_documento, mostrar_documento_colegios_path(documento_id: documento), target: :_blank, format: :pdf %></td>
-        <td><%= documento.documento.nombre %></td>
         <td><%= documento.created_at.strftime('%d-%m-%Y') %></td>
+        <td><%= documento.mes ? t('date.month_names')[documento.mes] : '' %></td>
+        <td><%= documento.anyo ? documento.anyo : '' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,10 +25,11 @@ $(document).ready(function () {
       "columns": [
         null,
         null,
+        null,
         null
       ],
        "ordering": true,
-       'order': [[2, 'desc']],
+       'order': [[1, 'desc']],
        "language": {
          "paginate": {
            "next": "Siguiente",

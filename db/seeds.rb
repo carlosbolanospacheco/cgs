@@ -329,11 +329,11 @@ Cargo.create(nombre: 'Vicesecretario', codigo: '9')
 Cargo.create(nombre: 'Vocal Ejercientes', codigo: '10')
 Cargo.create(nombre: 'Vocal No Ejercientes', codigo: '11')
 
-RegimenColegiado.create(literal: 'Ejerciente libre', period_id: Period.first.id)
-RegimenColegiado.create(literal: 'Ejerciente por cuenta ajena', period_id: Period.first.id)
-RegimenColegiado.create(literal: 'Emérito', period_id: Period.first.id)
-RegimenColegiado.create(literal: 'No jerciente', period_id: Period.first.id)
-RegimenColegiado.create(literal: 'Precolegiado', period_id: Period.first.id)
+RegimenColegiado.create(literal: 'Ejerciente libre', period_id: Period.first.id, activo: true)
+RegimenColegiado.create(literal: 'Ejerciente por cuenta ajena', period_id: Period.first.id, activo: true)
+RegimenColegiado.create(literal: 'Emérito', period_id: Period.first.id, activo: false)
+RegimenColegiado.create(literal: 'No jerciente', period_id: Period.first.id, activo: true)
+RegimenColegiado.create(literal: 'Precolegiado', period_id: Period.first.id, activo: false)
 
 CausaBaja.create(nombre: 'Baja Voluntaria', codigo: '1')
 CausaBaja.create(nombre: 'Cambio de Cargo', codigo: '2')
@@ -358,7 +358,7 @@ User.create! do |u|
   u.username  = 'admin_test'
   u.password  = 'password'
   u.password_confirmation = 'password'
-  u.superadmin_rol = true
+  u.superadmin_role = true
 end
 
 Documento.create(nombre: 'Cambio de estado', codigo: 'cambio_estado', plantilla: 'plantilla_colegiado', documento_personal: true)
@@ -368,7 +368,7 @@ Documento.create(nombre: 'Certificado de cuotas', codigo: 'certificado_cuotas', 
 Documento.create(nombre: 'Recibo Manual', codigo: 'recibo', plantilla: 'plantilla_recibo', documento_personal: true)
 Documento.create(nombre: 'Convocatoria de Junta de Gobierno', codigo: 'junta_gobierno', plantilla: 'plantilla_junta', documento_personal: false)
 Documento.create(nombre: 'Convocatoria de Junta General Ordinaria', codigo: 'junta_general', plantilla: 'plantilla_junta', documento_personal: false)
-Documento.create(nombre: 'Modelo 13', codigo: 'modelo_13', plantilla: 'plantilla_modelo_13', documento_personal: true)
+Documento.create(nombre: 'Modelo 13', codigo: 'modelo_13', plantilla: 'plantilla_modelo_13', documento_personal: false)
 Documento.create(nombre: 'Domiciliación Bancaria', codigo: 'domiciliacion_bancaria', plantilla: 'plantilla_domiciliacion', documento_personal: true)
 Documento.create(nombre: 'Etiquetas', codigo: 'etiqueta', plantilla: 'plantilla_etiqueta', documento_personal: false)
 Documento.create(nombre: 'Listado de Colegiados', codigo: 'listado', plantilla: 'plantilla_listado', documento_personal: false)

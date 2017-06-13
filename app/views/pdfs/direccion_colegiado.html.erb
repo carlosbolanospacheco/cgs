@@ -1,14 +1,14 @@
-<table width="100%">
-  <tr style="text-align:right">
+<table class='derecha'>
+  <tr>
     <td><strong><%= colegiado.nombre_completo %></strong></td>
   </tr>
-  <tr style="text-align:right">
+  <tr>
     <td>NIF: <strong><%= colegiado.nif %></strong></td>
   </tr>
-  <tr style="text-align:right">
+  <tr>
     <td>Colegiado Nº <strong><%= colegiado.numero %></strong></td>
   </tr>
-  <tr style="text-align:right">
+  <tr>
     <td>
       <% if colegiado.direccion_principal %>
         <%= colegiado.direccion_principal.direccion %><br>

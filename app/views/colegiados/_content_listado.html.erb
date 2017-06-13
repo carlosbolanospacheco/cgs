@@ -22,6 +22,9 @@
     <%= link_to " Crear un nuevo colegiado", new_colegiado_path, remote: true, class: "btn btn-block btn-info btn-lg fa fa-plus" %>
   </div>
 </div>
+<div class="box collapsed-box">
+  <%= render 'colegiados/mesa_electoral' %>
+</div>
 <%= render 'colegiados/modal_export_pdf' %>
 <script>
 $(document).ready(function () {

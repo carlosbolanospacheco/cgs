@@ -1,0 +1,74 @@
+<p class='fuente_minima azul'>A cumplimentar por el acreedor - To be completed by the creditor</p>
+<table class='cuadro'>
+  <tr>
+    <td>Referencia de la orden de domiciliación<br><div class='fuente_minima'>Mandate Reference</div></td>
+    <td><%= parametros['referencia_domiciliacion'] %></td>
+  </tr>
+  <tr>
+    <td>Identificador del Acreedor<br><div class='fuente_minima'>Creditor Identifier</div></td>
+    <td><%= parametros['identificador_acreedor'] %></td>
+  </tr>
+  <tr>
+    <td>Nombre del Acreedor<br><div class='fuente_minima'>Creditor's name</div></td>
+    <td><%= colegio.nombre %></td>
+  </tr>
+  <tr>
+    <td>Dirección<br><div class='fuente_minima'>Address</div></td>
+    <td><%= colegio.direccion %></td>
+  </tr>
+  <tr>
+    <td>Código Postal - Población<br><div class='fuente_minima'>Postal Code - City</div></td>
+    <td><%= colegio.codigo_postal %> - <%= colegio.poblacion %></td>
+  </tr>
+  <tr>
+    <td>Provincia - País<br><div class='fuente_minima'>Town - Country</div></td>
+    <td><%= colegio.provincia.nombre %> - España</td>
+  </tr>
+</table>
+<br>
+<p>Mediante la firma de esta orden de domiciliación, el deudor autoriza (A) al acreedor a enviar instrucciones a la ent idad del deudor para adeudar su cuenta
+y (B) a la entidad para efectuar los adeudos en su cuenta siguiendo las instrucciones del acreedor. Como parte de sus derechos, el deudor está legitimado al reembolso por su entidad en los términos y condiciones del contrato suscrito con la misma. La solicitud de reembolso deberá efectuarse dentro de las ocho semanas que siguen a la fecha de adeudo en cuenta. Puede obtener información adicional sobre sus derechos en su entidad financiera.</p>
+<p class='fuente_minima'>By signing this mandate form, you au thorise (A) the Creditor to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with the instructions from the Creditor. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within eigth weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank.</p>
+<br>
+<p class='fuente_minima azul'>A cumplimentar por el deudor - To be completed by the debtor</p>
+<table class='cuadro'>
+  <tr>
+    <td>Nombre del Deudor<br><div class='fuente_minima'>Debtor's Name</div></td>
+    <td><%= colegiado.nombre_texto %></td>
+  </tr>
+  <tr>
+    <td>Dirección<br><div class='fuente_minima'>Address</div></td>
+    <td><%= colegiado.direccion_principal.direccion %></td>
+  </tr>
+  <tr>
+    <td>Código Postal - Población<br><div class='fuente_minima'>Postal Code - City</div></td>
+    <td><%= colegiado.direccion_principal.codigo_postal %> - <%= colegiado.direccion_principal.poblacion %></td>
+  </tr>
+  <tr>
+    <td>Provincia - País<br><div class='fuente_minima'>Town - Country</div></td>
+    <td><%= colegiado.direccion_principal.provincia.nombre %> - España</td>
+  </tr>
+  <tr>
+    <td>BIC del Deudor<br><div class='fuente_minima'>Debtor's BIC</div></td>
+    <td><%= parametros['bic_deudor'] %></td>
+  </tr>
+  <tr>
+    <td>IBAN del Deudor<br><div class='fuente_minima'>Debtor's IBAN</div></td>
+    <td><%= parametros['iban_deudor'] %></td>
+  </tr>
+  <tr>
+    <td>Tipo de Pago<br><div class='fuente_minima'>Type of Payment</div></td>
+    <td><%= parametros['recurrente'] ? 'Pago Recurrente / Recurrent Payment' : 'Pago Único / One Payment' %></td>
+  </tr>
+  <tr>
+    <td>Localidad - Fecha<br><div class='fuente_minima'>Location in Wich you are Signing - Date</div></td>
+    <td><%= colegio.poblacion %> - <%= l(DateTime.now.to_date, format:'%d de %B de %Y') %></td>
+  </tr>
+  <tr>
+    <td>Firma del Deudor<br><div class='fuente_minima'>Debtor's Signature</div></td>
+    <td><br><br><br><br><br></td>
+  </tr>
+</table>
+<br>
+<p class='centrado'>Todos los campos han de ser cumplimentados obligatoriamente.<br>Una vez firmada esta orden de domiciliación debe ser enviada al acreedor para su custodia</p>
+<p class='fuente_minima centrado'>All gaps are mandatory. Once this mandate has been signed must be sent to creditor for storage</p>

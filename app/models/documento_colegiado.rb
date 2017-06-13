@@ -7,8 +7,8 @@ class DocumentoColegiado < ApplicationRecord
   validates :nombre_documento, uniqueness: { message: 'Este documento ya existe' }
   # Scope
   default_scope { order(created_at: :desc) }
-  scope :solo_recibos, -> { joins(:documento).merge(Documento.where(codigo: 'recibo')) }
-  scope :sin_recibos, -> { joins(:documento).merge(Documento.where.not(codigo: 'recibo')) }
+  scope :solo_recibos, (-> { joins(:documento).merge(Documento.where(codigo: 'recibo')) })
+  scope :sin_recibos, (-> { joins(:documento).merge(Documento.where.not(codigo: 'recibo')) })
 
   def obtener_ruta
     "#{Rails.root}/public/system/documentos/#{documento.codigo}/#{nombre_documento}"

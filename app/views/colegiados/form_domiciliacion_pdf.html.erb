@@ -1,0 +1,136 @@
+<div class="box-header">
+  <h3 class="modal-title">Crear documento de domiciliación</h3>
+  <small>Indique los valores para el documento a generar para el colegiado <%= colegiado.nombre_texto %></small>
+</div>
+<%= form_tag documento_pdf_colegiados_path(format: 'pdf', documento_id: documento, colegiado_id: colegiado, colegio_id: colegio) do %>
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= label_tag 'Referencia de la Orden de Domiciliación' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-key"></i>
+            </div>
+            <%= text_field_tag 'referencia_domiciliacion', '', class: "form-control", required: "required", placeholder: "Referencia de la Orden de Domiciliación" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag 'Identificador del Acreedor' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-paw"></i>
+            </div>
+            <%= text_field_tag 'identificador_acreedor', '', class: "form-control", required: "required", placeholder: "Identificador del acreedor" %>
+          </div>
+          <p class="help-block">Dato proporcionado por su entidad</p>
+        </div>
+      </div>
+    </div>
+    <h4>Información del Deudor</h4>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag 'Nombre' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </div>
+            <%= text_field_tag 'nombre_deudor', @colegiado.nombre_texto, class: "form-control", required: "required", placeholder: "Nombre del deudor" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= label_tag 'Dirección' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-home"></i>
+            </div>
+            <%= text_field_tag 'direccion_deudor', @colegiado.direccion_principal ? @colegiado.direccion_principal.direccion : '', class: "form-control", required: "required", placeholder: "Dirección del deudor" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag 'Población' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-map"></i>
+            </div>
+            <%= text_field_tag 'poblacion_deudor', @colegiado.direccion_principal ? @colegiado.direccion_principal.poblacion : '', class: "form-control", required: "required", placeholder: "Población del deudor" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= label_tag 'Código Postal' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-envelope"></i>
+            </div>
+            <%= text_field_tag 'codigo_postal_deudor', @colegiado.direccion_principal ? @colegiado.direccion_principal.codigo_postal : '', class: "form-control", required: "required", placeholder: "Código Postal del deudor" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag 'Provincia' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-map"></i>
+            </div>
+            <%= text_field_tag 'provincia_deudor', @colegiado.direccion_principal ? @colegiado.direccion_principal.provincia.nombre : '', class: "form-control", required: "required", placeholder: "Provincia del deudor" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag 'SWIFT/BIC' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-bank"></i>
+            </div>
+            <%= text_field_tag 'bic_deudor', @colegiado.bic, class:"form-control", class: "form-control", required: "required", placeholder: "BIC" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= label_tag 'IBAN' %>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-bank"></i>
+            </div>
+            <%= text_field_tag 'iban_deudor', @colegiado.cuenta_bancaria, class:"form-control", class: "form-control", required: "required", placeholder: "IBAN" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <div class="icheck">
+            <%= check_box_tag "recurrente" %>
+            <%= label_tag "Pago Recurrente" %>
+          </div>
+          <p class="help-block">Si no se marca se considera un pago único</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="box-footer">
+    <%= button_tag 'Generar', id: 'generarButton', formtarget: '_blank', class: "btn btn-success" %>
+    <button type="button" class="btn btn-danger cancelEditButton">Cancelar</button>
+  </div>
+<% end %>
+<script>
+$(document).ready(function(){
+  $(".cancelEditButton").click(function(){
+    $("#canvas_documento").empty();
+    $("#box_documento").addClass('hidden');
+  });
+});
+</script>
